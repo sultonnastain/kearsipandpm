@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2021 at 04:40 PM
+-- Generation Time: Jul 01, 2021 at 02:16 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -55,7 +55,8 @@ CREATE TABLE `berkas_proposal` (
 --
 
 INSERT INTO `berkas_proposal` (`id`, `nomor`, `id_penomoran`, `nama_kegiatan`, `link`, `tanggal_kegiatan`) VALUES
-(2, '02', 1, 'oke', 'chjvkhlkjnl;jkg', '2021-06-27');
+(2, '02', 1, 'oke', 'chjvkhlkjnl;jkg', '2021-06-27'),
+(6, '2', 1, 'pemilwa vokasi', 'kdldjnksdhnkfndfksd', '2021-07-20');
 
 -- --------------------------------------------------------
 
@@ -228,7 +229,7 @@ CREATE TABLE `template_surat` (
   `id` int(11) NOT NULL,
   `nomor` varchar(20) NOT NULL,
   `jenis_kegiatan` varchar(40) NOT NULL,
-  `link` text NOT NULL
+  `berkas` mediumblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -335,7 +336,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `berkas_proposal`
 --
 ALTER TABLE `berkas_proposal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `konstitusi`
@@ -418,6 +419,24 @@ ALTER TABLE `berkas_proposal`
 --
 ALTER TABLE `konstitusi`
   ADD CONSTRAINT `konstitusi_ibfk_1` FOREIGN KEY (`id_penomoran`) REFERENCES `penomoran` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rapat_besar`
+--
+ALTER TABLE `rapat_besar`
+  ADD CONSTRAINT `rapat_besar_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rapat_koordinasi`
+--
+ALTER TABLE `rapat_koordinasi`
+  ADD CONSTRAINT `rapat_koordinasi_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rapat_pleno`
+--
+ALTER TABLE `rapat_pleno`
+  ADD CONSTRAINT `rapat_pleno_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `rekap_anggota`
