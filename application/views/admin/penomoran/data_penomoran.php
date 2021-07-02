@@ -52,7 +52,7 @@
                 </div>
                 <div class="form-group">
                     <label for="jumlah">Jumlah</label>
-                    <input type="date" class="form-control" autocomplete="off" name="jumlah" placeholder="Masukkan Tanggal Kegiatan">
+                    <input type="text" class="form-control" autocomplete="off" name="jumlah" placeholder="Masukkan Tanggal Kegiatan">
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
