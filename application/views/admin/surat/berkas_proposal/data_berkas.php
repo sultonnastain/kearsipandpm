@@ -40,7 +40,11 @@
             <div class="col-lg-12">
                <div class="form-group">
                     <label for="id_penomoran">penomoran</label>
-                    <input type="text" class="form-control" autocomplete="off" name="id_penomoran" placeholder="Masukkan Id Penomoran">
+                    <select class="form-control select2" name="id_penomoran" required id="id_penomoran">
+                    <?php foreach($penomoran as $row) : ?>
+                      <option value="<?php echo $row->id ?>"><?php echo $row->penomoran ?></option>
+                     <?php endforeach ?>
+                  </select>
                 </div>
                 <div class="form-group">
                     <label for="nama_kegiatan">Nama Kegiatan</label>
