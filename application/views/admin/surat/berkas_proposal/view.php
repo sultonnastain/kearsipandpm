@@ -32,7 +32,7 @@
             <input type="hidden" name="id"/>
             <div class="col-lg-12">
                 <div class="form-group">
-                    <label for="id_penomoran">Id Penomoran</label>
+                    <label for="id_penomoran">Penomoran</label>
                     <!-- bagian foreavh di bawah digunakan untuk mendapatkan data penomoran-->
                     <select class="form-control select2" name="id_penomoran" required id="id_penomoran">
                     <?php foreach($penomoran as $row) : ?>

@@ -2,7 +2,7 @@
     <thead>
         <tr>
                         <th>No</th>
-                        <th>id penomoran</th>
+                        <th>penomoran</th>
                         <th>Nama Kegiatan</th>
                         <th>Link</th>
                         <th>Tanggal kegiatan</th>
@@ -39,7 +39,7 @@
             <input type="hidden" name="id"/>
             <div class="col-lg-12">
                <div class="form-group">
-                    <label for="id_penomoran">Id penomoran</label>
+                    <label for="id_penomoran">penomoran</label>
                     <input type="text" class="form-control" autocomplete="off" name="id_penomoran" placeholder="Masukkan Id Penomoran">
                 </div>
                 <div class="form-group">
