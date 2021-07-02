@@ -32,11 +32,6 @@
             <input type="hidden" name="id"/>
             <div class="col-lg-12">
                 <div class="form-group">
-                    <label for="nomor">Nomor</label>
-                    <input type="text" class="form-control" autocomplete="off" name="nomor" placeholder="Masukkan Nomor Proposal">
-                </div>
-            <div class="col-lg-12">
-                <div class="form-group">
                     <label for="id_penomoran">Id Penomoran</label>
                     <input type="text" class="form-control" autocomplete="off" name="id_penomoran" placeholder="Masukkan Id Penomoran">
                 </div>

@@ -32,7 +32,6 @@ class Berkas_proposal extends CI_Controller {
 			if ($this->input->is_ajax_request()) {
 				$data = array(
 					'id' => $this->input->post('id'),
-					'nomor' => $this->input->post('nomor'),
 					'id_penomoran' => $this->input->post('id_penomoran'),
 					'nama_kegiatan' => $this->input->post('nama_kegiatan'),
 					'link' => $this->input->post('link'),
@@ -47,7 +46,6 @@ class Berkas_proposal extends CI_Controller {
 				$id = $this->input->post('id');
 				$data = array(
 					'id' => $this->input->post('id'),
-					'nomor' => $this->input->post('nomor'),
 					'id_penomoran' => $this->input->post('id_penomoran'),
 					'nama_kegiatan' => $this->input->post('nama_kegiatan'),
 					'link' => $this->input->post('link'),

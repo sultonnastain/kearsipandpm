@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2021 at 04:40 PM
+-- Generation Time: Jul 02, 2021 at 05:33 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -43,7 +43,6 @@ CREATE TABLE `admin` (
 
 CREATE TABLE `berkas_proposal` (
   `id` int(11) NOT NULL,
-  `nomor` varchar(20) NOT NULL,
   `id_penomoran` int(11) NOT NULL,
   `nama_kegiatan` varchar(40) NOT NULL,
   `link` text NOT NULL,
@@ -54,8 +53,8 @@ CREATE TABLE `berkas_proposal` (
 -- Dumping data for table `berkas_proposal`
 --
 
-INSERT INTO `berkas_proposal` (`id`, `nomor`, `id_penomoran`, `nama_kegiatan`, `link`, `tanggal_kegiatan`) VALUES
-(2, '02', 1, 'oke', 'chjvkhlkjnl;jkg', '2021-06-27');
+INSERT INTO `berkas_proposal` (`id`, `id_penomoran`, `nama_kegiatan`, `link`, `tanggal_kegiatan`) VALUES
+(7, 1, 'oke', 'msdkslfk', '2021-07-23');
 
 -- --------------------------------------------------------
 
@@ -65,7 +64,6 @@ INSERT INTO `berkas_proposal` (`id`, `nomor`, `id_penomoran`, `nama_kegiatan`, `
 
 CREATE TABLE `konstitusi` (
   `id` int(11) NOT NULL,
-  `nomor` int(20) NOT NULL,
   `id_penomoran` int(11) NOT NULL,
   `nama_konstitusi` varchar(70) NOT NULL,
   `berkas` mediumblob NOT NULL,
@@ -164,7 +162,6 @@ CREATE TABLE `rapat_pleno` (
 
 CREATE TABLE `rekap_anggota` (
   `id` int(11) NOT NULL,
-  `nomor` int(11) NOT NULL,
   `id_admin` int(11) NOT NULL,
   `nama` varchar(40) NOT NULL,
   `tunggakan` varchar(255) NOT NULL,
@@ -180,7 +177,6 @@ CREATE TABLE `rekap_anggota` (
 
 CREATE TABLE `rekap_organisasi` (
   `id` int(11) NOT NULL,
-  `nomor` varchar(20) NOT NULL,
   `id_admin` int(11) NOT NULL,
   `bulan` int(11) NOT NULL,
   `berkas` mediumblob NOT NULL,
@@ -195,7 +191,6 @@ CREATE TABLE `rekap_organisasi` (
 
 CREATE TABLE `surat_keluar` (
   `id` int(11) NOT NULL,
-  `nomor` varchar(20) NOT NULL,
   `id_penomoran` int(11) NOT NULL,
   `nama_dikirim` varchar(40) NOT NULL,
   `jenis_kegiatan` varchar(40) NOT NULL,
@@ -211,12 +206,18 @@ CREATE TABLE `surat_keluar` (
 
 CREATE TABLE `surat_masuk` (
   `id` int(11) NOT NULL,
-  `nomor` varchar(20) NOT NULL,
   `nama_pengirim` varchar(40) NOT NULL,
   `jenis_kegiatan` varchar(40) NOT NULL,
   `link` text NOT NULL,
   `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_masuk`
+--
+
+INSERT INTO `surat_masuk` (`id`, `nama_pengirim`, `jenis_kegiatan`, `link`, `tanggal`) VALUES
+(1, 'Himmasi', 'sertihab', 'jdbksbkd ncskdcnkn', '2021-07-08');
 
 -- --------------------------------------------------------
 
@@ -226,9 +227,8 @@ CREATE TABLE `surat_masuk` (
 
 CREATE TABLE `template_surat` (
   `id` int(11) NOT NULL,
-  `nomor` varchar(20) NOT NULL,
   `jenis_kegiatan` varchar(40) NOT NULL,
-  `link` text NOT NULL
+  `berkas` mediumblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -335,7 +335,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `berkas_proposal`
 --
 ALTER TABLE `berkas_proposal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `konstitusi`
@@ -395,7 +395,7 @@ ALTER TABLE `surat_keluar`
 -- AUTO_INCREMENT for table `surat_masuk`
 --
 ALTER TABLE `surat_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `template_surat`
@@ -418,6 +418,24 @@ ALTER TABLE `berkas_proposal`
 --
 ALTER TABLE `konstitusi`
   ADD CONSTRAINT `konstitusi_ibfk_1` FOREIGN KEY (`id_penomoran`) REFERENCES `penomoran` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rapat_besar`
+--
+ALTER TABLE `rapat_besar`
+  ADD CONSTRAINT `rapat_besar_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rapat_koordinasi`
+--
+ALTER TABLE `rapat_koordinasi`
+  ADD CONSTRAINT `rapat_koordinasi_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rapat_pleno`
+--
+ALTER TABLE `rapat_pleno`
+  ADD CONSTRAINT `rapat_pleno_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `rekap_anggota`
