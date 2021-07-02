@@ -12,10 +12,12 @@ class Berkas_proposal extends CI_Controller {
 	}
 	public function index()
 	{
+		//dibawah $data penomeran digunkan untuk mendapatkan penomeran di tabel penomeran
+		$data['penomoran'] = $this->BerkasproposalModel->get_penomoran();
         $this->load->view('template/header.php');
         $this->load->view('template/sidebar.php');
-		$this->load->view('template/navbar.php');
-		$this->load->view('admin/surat/berkas_proposal/view.php');
+		$this->load->view('template/navbar.php'); //tidak ada $data berarti tidak ada data yang diambil
+		$this->load->view('admin/surat/berkas_proposal/view.php',$data); // $data digunakan untuk mengampil data2 yang telah diatur dan dikirim ke view ini
 		$this->load->view('template/footer.php');
 		$this->load->view('admin/surat/berkas_proposal/script.php');
 	}

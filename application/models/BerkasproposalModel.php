@@ -31,5 +31,11 @@ class BerkasproposalModel extends CI_Model {
 		$data['count'] = $query->num_rows();
 		return $data;
 	}
+	//Mendapatkan penomeran dari db untuk dropdown
+	public function get_penomoran(){
+		$this->db->select('*');
+		$this->db->from('penomoran');
+		return $this->db->get()->result();
+	}
 }
 ?>
