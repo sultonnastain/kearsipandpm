@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< HEAD
 -- Generation Time: Jul 02, 2021 at 05:33 AM
+=======
+-- Generation Time: Jul 01, 2021 at 02:16 PM
+>>>>>>> f36648cb501b921e48a306edc2de713b7b65aa02
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -53,8 +57,14 @@ CREATE TABLE `berkas_proposal` (
 -- Dumping data for table `berkas_proposal`
 --
 
+<<<<<<< HEAD
 INSERT INTO `berkas_proposal` (`id`, `id_penomoran`, `nama_kegiatan`, `link`, `tanggal_kegiatan`) VALUES
 (7, 1, 'oke', 'msdkslfk', '2021-07-23');
+=======
+INSERT INTO `berkas_proposal` (`id`, `nomor`, `id_penomoran`, `nama_kegiatan`, `link`, `tanggal_kegiatan`) VALUES
+(2, '02', 1, 'oke', 'chjvkhlkjnl;jkg', '2021-06-27'),
+(6, '2', 1, 'pemilwa vokasi', 'kdldjnksdhnkfndfksd', '2021-07-20');
+>>>>>>> f36648cb501b921e48a306edc2de713b7b65aa02
 
 -- --------------------------------------------------------
 
@@ -335,7 +345,11 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `berkas_proposal`
 --
 ALTER TABLE `berkas_proposal`
+<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+>>>>>>> f36648cb501b921e48a306edc2de713b7b65aa02
 
 --
 -- AUTO_INCREMENT for table `konstitusi`
