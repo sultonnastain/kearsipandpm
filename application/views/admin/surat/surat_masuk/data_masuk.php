@@ -78,11 +78,11 @@
         data: {id: id},
       })
       .done(function(data) {
-        $("#form-edit-berkas_proposal input[name='id']").val(data.object.id);
-        $("#form-edit-berkas_proposal input[name='nama_pengirim']").val(data.object.nama_pengirim);
-        $("#form-edit-berkas_proposal input[name='jenis_kegiatan']").val(data.object.jenis_kegiatan);
-        $("#form-edit-berkas_proposal input[name='link']").val(data.object.link);
-        $("#form-edit-berkas_proposal input[name='tanggal']").val(data.object.tanggal);
+        $("#form-edit-surat_masuk input[name='id']").val(data.object.id);
+        $("#form-edit-surat_masuk input[name='nama_pengirim']").val(data.object.nama_pengirim);
+        $("#form-edit-surat_masuk input[name='jenis_kegiatan']").val(data.object.jenis_kegiatan);
+        $("#form-edit-surat_masuk input[name='link']").val(data.object.link);
+        $("#form-edit-surat_masuk input[name='tanggal']").val(data.object.tanggal);
         modal_edit.modal('show').on('shown.bs.modal', function(e) {
           $("#form-edit-surat_masuk input[name='id']").focus();
         });
