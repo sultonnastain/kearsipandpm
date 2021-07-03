@@ -83,7 +83,7 @@
       })
       .done(function(data) {
         $("#form-edit-admin input[name='id']").val(data.object.id);
-        $("#form-edit-admin input[name='nomor']").val(data.object.nomor);
+        $("#form-edit-admin input[name='nama']").val(data.object.nomor);
         $("#form-edit-admin input[name='username']").val(data.object.nama_kegiatan);
         $("#form-edit-admin input[name='password']").val(data.object.admin);
         $("#form-edit-admin input[name='level']").val(data.object.jumlah);
