@@ -44,12 +44,17 @@
                     <input type="text" class="form-control" autocomplete="off" name="password" placeholder="Masukkan Password">
                 </div>
                 <div class="form-group">
+                <select class="form-control select2" name="level" id="level" style="width: 100%;">
+                    <option value="kabiro">Kabiro</option>
+                    <option value="staff">Staff</option>
+                    </select>
+                  <!-- <select>
                     <label for="Level">Level</label>
                     <select class="form-control select2" name="level" required id="level">
                     <?php foreach($admin as $row) : ?>
                       <option value="<?php echo $row->id ?>"><?php echo $row->level ?></option>
                      <?php endforeach ?>
-                  </select>
+                  </select> -->
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
