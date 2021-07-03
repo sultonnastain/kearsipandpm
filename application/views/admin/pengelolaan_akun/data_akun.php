@@ -39,7 +39,7 @@
             <input type="hidden" name="id"/>
             <div class="col-lg-12">
                 <div class="form-group">
-                    <label for="nomor">Nama</label>
+                    <label for="nama">Nama</label>
                     <input type="text" class="form-control" autocomplete="off" name="nama" placeholder="Masukkan Nama admin">
                 </div>
                 <div class="form-group">
