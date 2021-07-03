@@ -23,7 +23,7 @@ class Pengelolaan_akun extends CI_Controller {
 	{
 		$admin = $this->PengelolaanakunModel->get_all();
 		$data['admin'] = $admin;
-		$this->load->view('admin/pengeloaan_akun/data_akun.php',$data);
+		$this->load->view('admin/pengelolaan_akun/data_akun.php',$data);
 	}
 	
 	public function crud($mode)

@@ -1,8 +1,7 @@
 <script>
     function refresh_table() {
     $.ajax({
-        type: 'POST',
-        url: "<?php echo base_url(); ?>/admin/get_all",
+        url: "<?php echo base_url(); ?>/pengelolaan_akun/get_all",
         cache: false,
         success: function(data) {
           $("#tampil").html(data);
