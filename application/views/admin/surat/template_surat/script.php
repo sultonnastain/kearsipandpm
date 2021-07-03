@@ -13,7 +13,6 @@
       });
     };
     refresh_table();
-  
     $("#form-tambah").submit(function(e) {
       e.preventDefault();
       modal_tambah = $("#modal-tambah");
@@ -22,7 +21,11 @@
        url: '<?=site_url('template_surat/crud/insert')?>',
        type: 'POST',
        dataType: 'json',
-       data: form.serialize(),
+       data:new FormData(this),
+       processData:false,
+       contentType:false,
+       cache:false,
+       async:false,
       success: function(){ 
         alert('success!');
         modal_tambah.modal('hide');
