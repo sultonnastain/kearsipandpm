@@ -37,8 +37,8 @@
                 </div>
                 <!---code masih salah --->
                 <div class="form-group">
-                    <label for="link">Berkas</label>
-                    <input type="text" class="form-control" autocomplete="off" name="berkas" placeholder="Masukkan berkas template">
+                    <label for="berkas">Berkas</label>
+                    <input type="file"/>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
