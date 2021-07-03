@@ -1,8 +1,8 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class SuratmasukModel extends CI_Model {
-	public $table = 'surat_masuk';
+class PengelolaanakunModel extends CI_Model {
+	public $table = 'admin';
 
 	public function insert($data)
 	{
@@ -18,10 +18,9 @@ class SuratmasukModel extends CI_Model {
 	{
 		return $this->db->delete($this->table, array('id' => $id));
 	}
-	
 	public function get_all(){
 		$this->db->select('*');
-		$this->db->from('surat_masuk');
+		$this->db->from('admin');
 		return $this->db->get();
 	}
 	public function get_by_id($id)

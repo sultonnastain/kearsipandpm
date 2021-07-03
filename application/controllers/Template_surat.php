@@ -23,7 +23,7 @@ class Template_surat extends CI_Controller {
 	{
 		$template_surat = $this->TemplatesuratModel->get_all();
 		$data['template_surat'] = $template_surat;
-		$this->load->view('admin/surat/template_surat/data_masuk.php',$data);
+		$this->load->view('admin/surat/template_surat/data_template.php',$data);
 	}
 	
 	public function crud($mode)
@@ -33,7 +33,7 @@ class Template_surat extends CI_Controller {
 				$data = array(
 					'id' => $this->input->post('id'),
 					'jenis_kegiatan' => $this->input->post('jenis_kegiatan'),
-					'berkas' => $this->input->post('berkas'),
+					'berkas' => $this->input->post('uploadBerkas'),
 				);
 				$result = $this->TemplatesuratModel->insert($data);
 				echo json_encode($result);
@@ -45,7 +45,12 @@ class Template_surat extends CI_Controller {
 				$data = array(
 					'id' => $this->input->post('id'),
 					'jenis_kegiatan' => $this->input->post('jenis_kegiatan'),
-					'berkas' => $this->input->post('berkas'),
+					
+					if (!empty($_FILES["berkas"["name"])) {
+						$this->berkas = $this->_uploadBerkas();
+					} else {
+						$this->image = $post["old_berkas"];
+					}
 				);
 				$result = $this->TemplatesuratModel->update($data, $id);
 				echo json_encode($result);
@@ -56,6 +61,21 @@ class Template_surat extends CI_Controller {
 				$id = $this->input->post('id');
 				$result = $this->TemplatesuratModel->delete($id);
 				echo json_encode($result);
+			}
+			private function _uploadBerkas()
+			{
+				$config['upload_path']         = './upload';
+				$config['allowed_types']       = 'xls|docx|pdf';
+				$config['file_name']           = $string->id;
+				$config['overwrite']           = true;
+				$config['max_size']            = 2000000;
+				
+				$this->load->library('upload' , $config);
+		
+				if ($this->upload->do_upload('berkas')) {
+					return $this->upload->data("file name");
+				}
+				return "0";
 			}
 		}
 	}
