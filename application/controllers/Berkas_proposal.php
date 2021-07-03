@@ -23,6 +23,7 @@ class Berkas_proposal extends CI_Controller {
 	}
 	public function get_all()
 	{
+		$data['penomoran'] = $this->BerkasproposalModel->get_penomoran();
 		$berkas_proposal = $this->BerkasproposalModel->get_all();
 		$data['berkas_proposal'] = $berkas_proposal;
 		$this->load->view('admin/surat/berkas_proposal/data_berkas.php',$data);

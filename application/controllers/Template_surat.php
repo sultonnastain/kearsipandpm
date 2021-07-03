@@ -42,15 +42,15 @@ class Template_surat extends CI_Controller {
 		else if ($mode == 'update') {
 			if ($this->input->is_ajax_request()) {
 				$id = $this->input->post('id');
+				if (!empty($_FILES["berkas"]["name"])) {
+					$this->berkas = $this->_uploadBerkas();
+				} else {
+					$this->image = $post["old_berkas"];
+				}
 				$data = array(
 					'id' => $this->input->post('id'),
 					'jenis_kegiatan' => $this->input->post('jenis_kegiatan'),
 					
-					if (!empty($_FILES["berkas"["name"])) {
-						$this->berkas = $this->_uploadBerkas();
-					} else {
-						$this->image = $post["old_berkas"];
-					}
 				);
 				$result = $this->TemplatesuratModel->update($data, $id);
 				echo json_encode($result);
@@ -62,7 +62,7 @@ class Template_surat extends CI_Controller {
 				$result = $this->TemplatesuratModel->delete($id);
 				echo json_encode($result);
 			}
-			private function _uploadBerkas()
+			function _uploadBerkas()
 			{
 				$config['upload_path']         = './upload';
 				$config['allowed_types']       = 'xls|docx|pdf';

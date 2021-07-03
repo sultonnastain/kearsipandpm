@@ -40,7 +40,7 @@
             <div class="col-lg-12">
                <div class="form-group">
                     <label for="id_penomoran">penomoran</label>
-                    <select class="form-control select2" name="id_penomoran" required id="id_penomoran">
+                    <select class="form-control select2" name="id_penomoran" required id="id_penomoran_edit">
                     <?php foreach($penomoran as $row) : ?>
                       <option value="<?php echo $row->id ?>"><?php echo $row->penomoran ?></option>
                      <?php endforeach ?>
@@ -83,7 +83,9 @@
       })
       .done(function(data) {
         $("#form-edit-berkas_proposal input[name='id']").val(data.object.id);
-        $("#form-edit-berkas_proposal input[name='id_penomoran']").val(data.object.id_penomoran);
+        // $("#form-edit-berkas_proposal input[name='id_penomoran']").val(data.object.id_penomoran);
+        //untuk dropdown di bawah
+        $("#id_penomoran_edit").val(data.object.id_penomoran);
         $("#form-edit-berkas_proposal input[name='nama_kegiatan']").val(data.object.nama_kegiatan);
         $("#form-edit-berkas_proposal input[name='link']").val(data.object.link);
         $("#form-edit-berkas_proposal input[name='tanggal_kegiatan']").val(data.object.tanggal_kegiatan);
