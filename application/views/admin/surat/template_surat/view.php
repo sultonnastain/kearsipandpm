@@ -23,7 +23,7 @@
           <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Tambah Data Surat Masuk</h4>
+              <h4 class="modal-title">Tambah Data Template Surat</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -37,8 +37,8 @@
                 </div>
                 <!---code masih salah --->
                 <div class="form-group">
-                    <label for="link">Berkas</label>
-                    <input type="text" class="form-control" autocomplete="off" name="berkas" placeholder="Masukkan berkas template">
+                    <label for="berkas">Berkas</label>
+                    <input type="file"/>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
