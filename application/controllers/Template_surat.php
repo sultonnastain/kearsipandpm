@@ -8,6 +8,7 @@ class Template_surat extends CI_Controller {
         $this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->model('TemplatesuratModel');
+		$this->load->library('upload');
 		$this->load->database();
 	}
 	public function index()
@@ -30,13 +31,26 @@ class Template_surat extends CI_Controller {
 	{
 		if ($mode == 'insert') {
 			if ($this->input->is_ajax_request()) {
-				$data = array(
-					'id' => $this->input->post('id'),
-					'jenis_kegiatan' => $this->input->post('jenis_kegiatan'),
-					'berkas' => $this->input->post('uploadBerkas'),
-				);
-				$result = $this->TemplatesuratModel->insert($data);
-				echo json_encode($result);
+				$timezone = new DateTimeZone('Asia/Jakarta');
+				$date = new DateTime();
+				$date->setTimeZone($timezone);
+				$config['upload_path']          = './uploads/';
+				$config['allowed_types']        = 'pdf';
+				$config['max_size']             = 10240;
+				$config['width']                = 300;
+                $config['height']               = 400;
+				$filename =  date("Y-m-d_His") . '-' . $_FILES['berkas']['name'];
+				$config['file_name'] =$filename;
+				$this->upload->initialize($config); 
+				if($this->upload->do_upload("berkas")){ 
+					$data = array(
+						'id' => $this->input->post('id'),
+						'jenis_kegiatan' => $this->input->post('jenis_kegiatan'),
+						'berkas' => $filename,
+					);
+					$result = $this->TemplatesuratModel->insert($data);
+					echo json_encode($result);
+				}
 			}
 		}
 		else if ($mode == 'update') {
