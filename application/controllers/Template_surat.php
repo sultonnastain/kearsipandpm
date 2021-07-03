@@ -35,7 +35,7 @@ class Template_surat extends CI_Controller {
 				$date = new DateTime();
 				$date->setTimeZone($timezone);
 				$config['upload_path']          = './uploads/';
-				$config['allowed_types']        = 'pdf';
+				$config['allowed_types']        = 'pdf|doc|docx|xslsx';
 				$config['max_size']             = 10240;
 				$config['width']                = 300;
                 $config['height']               = 400;
