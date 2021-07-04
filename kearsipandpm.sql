@@ -113,7 +113,7 @@ CREATE TABLE `rapat_besar` (
   `id` int(20) NOT NULL,
   `id_admin` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `dokumen` mediumblob NOT NULL,
+  `berkas` mediumblob NOT NULL,
   `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
