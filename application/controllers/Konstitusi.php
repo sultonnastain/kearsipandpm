@@ -98,6 +98,7 @@ class Konstitusi extends CI_Controller {
 			}
 		}
 	}
+}
 	public function get_by_id () {
 		$id = $this->input->get('id');
 		$data = $this->KonstitusiModel->get_by_id($id);
