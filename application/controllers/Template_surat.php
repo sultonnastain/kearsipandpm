@@ -9,6 +9,7 @@ class Template_surat extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->model('TemplatesuratModel');
 		$this->load->library('upload');
+		$this->load->helper('download');
 		$this->load->database();
 	}
 	public function index()
@@ -55,7 +56,7 @@ class Template_surat extends CI_Controller {
 		}
 		else if ($mode == 'update') {
 			if ($this->input->is_ajax_request()) {
-				$id = $this->input->post('id');
+				$id = $this->input->get('id');
 				if (!empty($_FILES["berkas"]["name"])) {
 					$this->berkas = $this->_uploadBerkas();
 				} else {
@@ -90,6 +91,21 @@ class Template_surat extends CI_Controller {
 					return $this->upload->data("file name");
 				}
 				return "0";
+			}
+		}
+		else if ($mode == 'dawnload') {
+			if ($this->input->is_ajax_request()) {
+				$id = $this->input->post('id');
+				$this->db->select('berkas');
+				$this->db->from('template_surat');
+				$this->db->where('id',$id);
+				$template=$this->db->get();
+				foreach($template->result() as $row) {
+					$nama_file = $row->berkas;
+				}
+				$data = 'Here is some text!';
+		         $name = 'mytext.txt';
+		        force_download($name, $data);
 			}
 		}
 	}
