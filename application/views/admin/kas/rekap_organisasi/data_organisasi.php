@@ -3,9 +3,9 @@
         <tr>
                         <th>No</th>
                         <th>ID admin</th>
-                        <th>Agenda</th>
-                        <th>Notulensi</th>
-                        <th>Tanggal Rabes</th>
+                        <th>Bulan</th>
+                        <th>Berkas</th>
+                        <th>Keterangan</th>
                         <th>Aksi</th>
                     </tr>
     </thead>
@@ -15,9 +15,9 @@
         <tr>
             <td><?php echo $no++ ?></td>
             <td><?php echo $result->id_admin ?></td>
-            <td><?php echo $result->nama ?></td>
-            <td><?php echo $result->notulen ?></td>
-            <td><?php echo $result->tanggal ?></td>
+            <td><?php echo $result->bulan?></td>
+            <td><?php echo $result->berkas ?></td>
+            <td><?php echo $result->keterangan ?></td>
             <td class="text-center">
                 <i class="btn btn-xs btn-primary fa fa-edit edit-data" data-id="<?php echo $result->id ?>" data-placement="top" title="Edit"></i>
                 <i class="btn btn-xs btn-danger fas fa-trash-alt hapus-data" data-id="<?php echo $result->id ?>" data-placement="top" title="Delete"></i>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-group">
                     <label for="bulan">Bulan</label>
-                    <input type="text" class="form-control" autocomplete="off" name="bulan" placeholder="Masukkan Nama Agenda">
+                    <input type="text" class="form-control" autocomplete="off" name="bulan" placeholder="Masukkan Nama bulan">
                 </div>
                 <div class="form-group">
                     <label for="berkas">Berkas</label>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label>
-                    <input type="date" class="form-control" autocomplete="off" name="keterangan" placeholder="Masukkan Tanggal Rabes">
+                    <input type="text" class="form-control" autocomplete="off" name="keterangan" placeholder="Masukkan Keterangan">
                 </div>
             </div>
             <div class="modal-footer justify-content-between">

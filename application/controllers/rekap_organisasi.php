@@ -24,9 +24,9 @@ class Rekap_organisasi extends CI_Controller {
 	public function get_all()
 	{
 		$data['admin'] = $this->RekaporganisasiModel->get_admin();
-		$rekap_anggota = $this->RekaporganisasiModel->get_all();
-		$data['rekap_anggota'] = $rekap_anggota;
-		$this->load->view('admin/kas/rekap_anggota/data_organisasi.php',$data);
+		$rekap_organisasi = $this->RekaporganisasiModel->get_all();
+		$data['rekap_organisasi'] = $rekap_organisasi;
+		$this->load->view('admin/kas/rekap_organisasi/data_organisasi.php',$data);
 	}
 	
 	public function crud($mode)
@@ -68,7 +68,7 @@ class Rekap_organisasi extends CI_Controller {
 					'id' => $this->input->post('id'),
 					'id_admin' => $this->input->post('id_admin'),
 					'bulan' => $this->input->post('bulan'),
-					'berkas' => $filename,
+					// 'berkas' => $filename,
 					'keterangan' => $this->input->post('keterangan')
 				);
 				$result = $this->RekaporganisasiModel->update($data, $id);

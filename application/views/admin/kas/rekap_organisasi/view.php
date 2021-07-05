@@ -3,7 +3,7 @@
 
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Rekapitulasi KAS DPM Vokasi UB</h1>
-<p class="mb-4">Berikut merupakan Rejapitulasi bulanan KAS DPM Vokasi Universitas Brawijaya.</p>
+<p class="mb-4">Berikut merupakan Rekapitulasi bulanan KAS DPM Vokasi Universitas Brawijaya.</p>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label for="bulan">Bulan</label>
-                    <input type="text" class="form-control" autocomplete="off" name="bulan" placeholder="Masukkan Nama Agenda">
+                    <input type="text" class="form-control" autocomplete="off" name="bulan" placeholder="Masukkan nama bulan">
                 </div>
                 <div class="form-group">
                     <label for="berkas">Berkas</label>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label>
-                    <input type="date" class="form-control" autocomplete="off" name="keterangan" placeholder="Masukkan Tanggal Rabes">
+                    <input type="text" class="form-control" autocomplete="off" name="keterangan" placeholder="Masukkan keterangan">
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
