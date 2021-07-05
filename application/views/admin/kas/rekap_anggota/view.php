@@ -41,7 +41,7 @@
                 </div>
                 <div class="form-group">
                     <label for="nama">Nama Anggota</label>
-                    <input type="text" class="form-control" autocomplete="off" name="nama" placeholder="Masukkan Nama Kegiatan">
+                    <input type="text" class="form-control" autocomplete="off" name="nama" placeholder="Masukkan Nama Anggota">
                 </div>
                 <div class="form-group">
                     <label for="tunggakan">Tunggakan</label>
