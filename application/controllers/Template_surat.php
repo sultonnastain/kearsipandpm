@@ -60,7 +60,7 @@ class Template_surat extends CI_Controller {
 				if (!empty($_FILES["berkas"]["name"])) {
 					$this->berkas = $this->_uploadBerkas();
 				} else {
-					$this->image = $post["old_berkas"];
+					$this->image = $post["old_image"];
 				}
 				$data = array(
 					'id' => $this->input->post('id'),

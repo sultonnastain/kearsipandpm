@@ -5,7 +5,7 @@
         cache: false,
         success: function(data) {
           $("#tampil").html(data);
-          $('#admin').DataTable({
+          $('#pengelolaan_akun').DataTable({
           "responsive": true, "lengthChange": true, "autoWidth": false
           });
         }
@@ -18,7 +18,7 @@
       modal_tambah = $("#modal-tambah");
       form = $(this);
       $.ajax({
-       url: '<?=site_url('admin/crud/insert')?>',
+       url: '<?=site_url('pengelolaan_akun/crud/insert')?>',
        type: 'POST',
        dataType: 'json',
        data: form.serialize(),
@@ -26,7 +26,7 @@
         alert('success!');
         modal_tambah.modal('hide');
         form[0].reset();
-        $('#admin').DataTable().clear().destroy();
+        $('#pengelolaan_akun').DataTable().clear().destroy();
         refresh_table();
       },
       error: function(response){

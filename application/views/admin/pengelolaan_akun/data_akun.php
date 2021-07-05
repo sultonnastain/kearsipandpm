@@ -1,6 +1,7 @@
-<table id="admin" class="table table-bordered table-striped">
+<table id="pengelolaan_akun" class="table table-bordered table-striped">
     <thead>
         <tr>
+                        <th>ID</th>
                         <th>Nomor</th>
                         <th>Nama</th>
                         <th>Username</th>
@@ -13,6 +14,7 @@
         <?php $no = 1; ?>
         <?php foreach($admin->result() as $result) : ?>
         <tr>
+        <td><?php echo $result->id ?></td>
             <td><?php echo $no++ ?></td>
             <td><?php echo $result->nama ?></td>
             <td><?php echo $result->username ?></td>
@@ -35,7 +37,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form id="form-edit-admin">
+            <form id="form-edit-pengelolaan_akun">
             <input type="hidden" name="id"/>
             <div class="col-lg-12">
                 <div class="form-group">
@@ -74,28 +76,28 @@
     $(".edit-data").click(function(e) {
       id = $(this).data('id');
       $.ajax({
-        url: '<?=site_url('admin/get_by_id')?>',
+        url: '<?=site_url('pengelolaan_akun/get_by_id')?>',
         type: 'GET',
         dataType: 'json',
         data: {id: id},
       })
       .done(function(data) {
-        $("#form-edit-admin input[name='id']").val(data.object.id);
-        $("#form-edit-admin input[name='nama']").val(data.object.nama);
-        $("#form-edit-admin input[name='username']").val(data.object.username);
-        $("#form-edit-admin input[name='password']").val(data.object.password);
-        $("#form-edit-admin input[name='level']").val(data.object.level);
+        $("#form-edit-pengelolaan_akun input[name='id']").val(data.object.id);
+        $("#form-edit-pengelolaan_akun input[name='nama']").val(data.object.nama);
+        $("#form-edit-pengelolaan_akun input[name='username']").val(data.object.username);
+        $("#form-edit-pengelolaan_akun input[name='password']").val(data.object.password);
+        $("#form-edit-pengelolaan_akun input[name='level']").val(data.object.level);
         modal_edit.modal('show').on('shown.bs.modal', function(e) {
-          $("#form-edit-admin input[name='id']").focus();
+          $("#form-edit-pengelolaan_akun input[name='id']").focus();
         });
       });
     });
     //Proses Update ke Db
-    $("#form-edit-admin").submit(function(e) {
+    $("#form-edit-pengelolaan_akun").submit(function(e) {
     e.preventDefault();
     form = $(this);
     $.ajax({
-      url: '<?=site_url('admin/crud/update')?>',
+      url: '<?=site_url('pengelolaan_akun/crud/update')?>',
       type: 'POST',
       dataType: 'json',
       data: form.serialize(),
@@ -103,7 +105,7 @@
         form[0].reset();
         alert('success!');
         modal_edit.modal('hide');
-        $('#admin').DataTable().clear().destroy();
+        $('#pengelolaan_akun').DataTable().clear().destroy();
         refresh_table();
       },
       error: function(response){
@@ -116,12 +118,12 @@
       id = $(this).data('id');
       if (confirm("Anda yakin menghapus data ini?")) {
         $.ajax({
-          url: '<?=site_url('admin/crud/delete')?>',
+          url: '<?=site_url('pengelolaan_akun/crud/delete')?>',
           type: 'POST',
           dataType: 'json',
           data: {id: id},
           success: function(data){ 
-          $('#admin').DataTable().clear().destroy();
+          $('#pengelolaan_akun').DataTable().clear().destroy();
           refresh_table();
           },
           error: function(response){
