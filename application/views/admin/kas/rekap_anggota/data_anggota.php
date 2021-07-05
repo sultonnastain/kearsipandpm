@@ -53,11 +53,11 @@
                 </div>
                 <div class="form-group">
                     <label for="tunggakan">Tunggakan</label>
-                    <input type="text" class="form-control" autocomplete="off" name="tunggakan" placeholder="Masukkan Link drive Proposal">
+                    <input type="text" class="form-control" autocomplete="off" name="tunggakan" placeholder="Masukkan Tunggakan jika ada">
                 </div>
                 <div class="form-group">
                     <label for="total">Total</label>
-                    <input type="date" class="form-control" autocomplete="off" name="total" placeholder="Masukkan Tanggal Kegiatan">
+                    <input type="text" class="form-control" autocomplete="off" name="total" placeholder="Masukkan Total yang telah dibayarkan">
                 </div>
                 <div class="form-group">
                     <label for="status">status</label>
