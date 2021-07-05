@@ -1,3 +1,8 @@
+<style>
+.btn2{
+  font-weight:900;
+}
+</style>
 <table id="template_surat" class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -15,6 +20,7 @@
             <td><?php echo $result->jenis_kegiatan ?></td>
             <td><?php echo $result->berkas ?></td>
             <td class="text-center">
+            <i class="btn btn2 btn-xs btn-primary fa fa-file-download dawnload-data" data-id="<?php echo $result->id ?>" data-placement="top" title="Dawnload"></i>
                 <i class="btn btn-xs btn-primary fa fa-edit edit-data" data-id="<?php echo $result->id ?>" data-placement="top" title="Edit"></i>
                 <i class="btn btn-xs btn-danger fas fa-trash-alt hapus-data" data-id="<?php echo $result->id ?>" data-placement="top" title="Delete"></i>
             </td>
@@ -114,6 +120,20 @@
           }
         })
       }
+    });
+    $(".dawnload-data").click(function(e) {
+      e.preventDefault();
+      id = $(this).data('id');
+        $.ajax({
+          url: '<?=site_url('template_surat/crud/dawnload')?>',
+          type: 'GET',
+          data: {id: id},
+          success: function(data){ 
+          },
+          error: function(response){
+          alert(response);
+          }
+        })
     });
     
 </script>

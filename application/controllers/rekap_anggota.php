@@ -12,7 +12,7 @@ class Rekap_anggota extends CI_Controller {
 	}
 	public function index()
 	{
-		$data['admin'] = $this->RekapaggotaModel->get_admin();
+		$data['admin'] = $this->RekapanggotaModel->get_admin();
         $this->load->view('template/header.php');
         $this->load->view('template/sidebar.php');
 		$this->load->view('template/navbar.php');
