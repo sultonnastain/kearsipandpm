@@ -3,7 +3,7 @@
 
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Pengelolaan akun admin DPM Vokasi UB</h1>
-<p class="mb-4">Berikut merupakan halaman pebgelolaan admin website kearsipan DPM Vokasi Universitas Brawijaya.</p>
+<p class="mb-4">Berikut merupakan halaman pengelolaan admin website kearsipan DPM Vokasi Universitas Brawijaya.</p>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
