@@ -43,9 +43,10 @@
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
+                                        <?php echo form_open("auth/cek_login"); ?>
                                             <input type="text" class="form-control form-control-user"
-                                                id="email" 
-                                                name="email"
+                                                id="username" 
+                                                name="username"
                                                 placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
@@ -61,8 +62,9 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <a href=<?php echo form_close(); ?> method="post"> method="post"> class="btn btn-primary btn-user btn-block">
                                             Login
+                                            <?php echo form_close(); ?>
                                         </a>
                                        
                                     </form>
