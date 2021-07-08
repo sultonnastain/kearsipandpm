@@ -12,8 +12,6 @@
     </div>
     <div class="card-body">
                 <button class="btn btn-primary"data-toggle="modal" data-target="#modal-tambah"><i class="fa fa-plus"></i> Tambah Data</button>
-                <button class="btn btn-warning"data-toggle="modal" data-target="#modal-upload"><i class="fa fa-file-import"></i> Import Excel</button>
-                <button class="btn btn-danger"data-toggle="modal" data-target="#modal-multiple"><i class="fa fa-file-upload"></i> Upload Multiple Foto</button>
                <br><br>
         <div id="tampil">
         </div>

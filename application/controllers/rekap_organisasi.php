@@ -68,7 +68,7 @@ class Rekap_organisasi extends CI_Controller {
 					'id' => $this->input->post('id'),
 					'id_admin' => $this->input->post('id_admin'),
 					'bulan' => $this->input->post('bulan'),
-					// 'berkas' => $filename,
+					'berkas' => $filename,
 					'keterangan' => $this->input->post('keterangan')
 				);
 				$result = $this->RekaporganisasiModel->update($data, $id);
