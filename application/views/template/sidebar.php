@@ -32,7 +32,7 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
-       <div class="form-inline">
+       <!-- <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
@@ -41,13 +41,13 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> -->
         <!-- Divider -->
         <hr class="sidebar-divider">
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Interface
+            Surat dan keuangan
         </div>
 
         <!-- Nav Item - latter Menu -->
@@ -91,7 +91,7 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Addons
+            Absensi dan perundang undangan
         </div>
 
         <!-- Nav Item - Absensi Collapse Menu -->

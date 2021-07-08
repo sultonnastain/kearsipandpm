@@ -13,7 +13,7 @@
         </button>
 
         <!-- Topbar Search -->
-        <div
+        <!-- <div
             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group" data-widget="navbar-search">
                 <input type="search" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -24,7 +24,7 @@
                     </button>
                 </div>
             </div>
-       </div>
+       </div> -->
         <!-- <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
