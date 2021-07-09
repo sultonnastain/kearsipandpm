@@ -22,6 +22,7 @@ class Surat_keluar extends CI_Controller {
 	}
 	public function get_all()
 	{
+		$data['penomoran'] = $this->SuratkeluarModel->get_penomoran();
 		$surat_keluar = $this->SuratkeluarModel->get_all();
 		$data['surat_keluar'] = $surat_keluar;
 		$this->load->view('admin/surat/surat_keluar/data_keluar.php',$data);

@@ -22,5 +22,12 @@
 
       <!-- Custom styles for this page -->
       <link href="<?=base_url()?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+      <!-- Select2 -->
+  <link rel="stylesheet" href="<?=base_url()?>assets/vendor/select2/css/select2.min.css">
+  <link rel="stylesheet" href="<?=base_url()?>assets/vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+  <!-- Sweet Alert -->
+  <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
+  <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" />
 
 </head>

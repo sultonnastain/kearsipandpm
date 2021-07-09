@@ -60,7 +60,8 @@
      <script src="<?=base_url()?>assets/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="<?=base_url()?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="<?=base_url()?>assets/js/demo/datatables-demo.js"></script>
-
+    <!-- Select2 -->
+    <script src="<?=base_url()?>assets/vendor/select2/js/select2.full.min.js"></script>
 
 </body>
 

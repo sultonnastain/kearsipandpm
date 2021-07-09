@@ -1,0 +1,10 @@
+Surat keluar bagian penomeran gak gawe koyo 21/43/dpmvokasi2021 ngunu ae a?
+Rekap anggota salah refresh table e.
+Bagian absensi ono tabel Id Admin iku gak ngawe nama ae a?
+Halaman konstitusi ono berkas e iku digawe koyo template surat berarti?
+Halaman pengelolaan akun iku sing ngatur password admin,terus kok password e diketokno?
+Iki dropdown e engko tak gawe select2
+Terus alert e gak mending gawe sweet alert?.lek iyo tak tambahane
+Seng Ckeditor iko halaman opo?
+Database e wes fix?
+dawnload sek durung
