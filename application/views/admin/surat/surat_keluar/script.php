@@ -13,6 +13,10 @@
       });
     };
     refresh_table();
+    $('#id_penomoran').select2({
+      theme: 'bootstrap4',
+      placeholder: "Pilih Id Penomoran"
+    });
   
     $("#form-tambah").submit(function(e) {
       e.preventDefault();
@@ -24,7 +28,7 @@
        dataType: 'json',
        data: form.serialize(),
       success: function(){ 
-        alert('success!');
+        swal("Berhasil!", "Data Surat Keluar Berhasil Ditambahkan.", "success");
         modal_tambah.modal('hide');
         form[0].reset();
         $('#surat_keluar').DataTable().clear().destroy();

@@ -19,8 +19,9 @@ class SuratkeluarModel extends CI_Model {
 		return $this->db->delete($this->table, array('id' => $id));
 	}
 	public function get_all(){
-		$this->db->select('*');
-		$this->db->from('surat_keluar');
+		$this->db->select('s.id,s.id_penomoran,s.nama_dikirim,s.jenis_kegiatan,s.link,s.tanggal,p.penomoran');
+		$this->db->from('surat_keluar s');
+		$this->db->join('penomoran p','p.id=s.id_penomoran');
 		return $this->db->get();
 	}
 	public function get_by_id($id)

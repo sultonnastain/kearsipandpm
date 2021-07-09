@@ -15,7 +15,7 @@
         <?php foreach($surat_keluar->result() as $result) : ?>
         <tr>
             <td><?php echo $no++ ?></td>
-            <td><?php echo $result->id_penomoran ?></td>
+            <td><?php echo $result->penomoran ?></td>
             <td><?php echo $result->nama_dikirim ?></td>
             <td><?php echo $result->jenis_kegiatan ?></td>
             <td><?php echo $result->link ?></td>
@@ -42,7 +42,7 @@
             <div class="col-lg-12">
                <div class="form-group">
                     <label for="id_penomoran">penomoran</label>
-                    <select class="form-control select2" name="id_penomoran" required id="id_penomoran">
+                    <select class="form-control select2" name="id_penomoran" required id="id_penomoran_edit" style="width: 100%;">
                     <?php foreach($penomoran as $row) : ?>
                       <option value="<?php echo $row->id ?>"><?php echo $row->penomoran ?></option>
                      <?php endforeach ?>
@@ -89,7 +89,10 @@
       })
       .done(function(data) {
         $("#form-edit-surat_keluar input[name='id']").val(data.object.id);
-        $("#form-edit-surat_keluar input[name='id_penomoran']").val(data.object.id_penomoran);
+        $("#id_penomoran_edit").val(data.object.id_penomoran);
+        $('#id_penomoran_edit').select2({
+          theme: 'bootstrap4'
+        });
         $("#form-edit-surat_keluar input[name='nama_dikirim']").val(data.object.nama_dikirim);
         $("#form-edit-surat_keluar input[name='jenis_kegiatan']").val(data.object.jenis_kegiatan);
         $("#form-edit-surat_keluar input[name='link']").val(data.object.link);
@@ -110,7 +113,7 @@
       data: form.serialize(),
       success: function(data){ 
         form[0].reset();
-        alert('success!');
+        swal("Berhasil!", "Data surat keluar berhasil diedit.", "success");
         modal_edit.modal('hide');
         $('#surat_keluar').DataTable().clear().destroy();
         refresh_table();
@@ -123,21 +126,37 @@
     $(".hapus-data").click(function(e) {
       e.preventDefault();
       id = $(this).data('id');
-      if (confirm("Anda yakin menghapus data ini?")) {
-        $.ajax({
-          url: '<?=site_url('surat_keluar/crud/delete')?>',
-          type: 'POST',
-          dataType: 'json',
-          data: {id: id},
-          success: function(data){ 
-          $('#surat_keluar').DataTable().clear().destroy();
-          refresh_table();
-          },
-          error: function(response){
-          alert(response);
-          }
-        })
-      }
+      swal({
+        title: "Apa Anda Yakin?",
+        text: "Data yang terhapus,tidak dapat dikembalikan!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Batalkan!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+             url: '<?=site_url('surat_keluar/crud/delete')?>',
+             type: 'POST',
+             dataType: 'json',
+             data: {id: id},
+             error: function() {
+                alert('Something is wrong');
+             },
+             success: function(data) {
+                  swal("Berhasil!", "Data Berhasil Dihapus.", "success");
+                  $('#siswa').DataTable().clear().destroy();
+                  refresh_table();
+             }
+          });
+        } else {
+          swal("Dibatalkan", "Data yang dipilih tidak jadi dihapus", "error");
+        }
+      });
     });
     
 </script>

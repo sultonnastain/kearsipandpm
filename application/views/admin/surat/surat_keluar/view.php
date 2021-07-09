@@ -32,7 +32,8 @@
                 <div class="form-group">
                     <label for="id_penomoran">Penomoran</label>
                     <!-- bagian foreavh di bawah digunakan untuk mendapatkan data penomoran-->
-                    <select class="form-control select2" name="id_penomoran" required id="id_penomoran">
+                    <select class="form-control select2" name="id_penomoran" required id="id_penomoran" style="width: 100%;">
+                    <option value="">Pilih Id Penomoran</option>
                     <?php foreach($penomoran as $row) : ?>
                       <option value="<?php echo $row->id ?>"><?php echo $row->penomoran ?></option>
                      <?php endforeach ?>
