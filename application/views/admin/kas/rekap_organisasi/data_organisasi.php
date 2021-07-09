@@ -52,7 +52,7 @@
                 </div>
                 <div class="form-group">
                     <label for="berkas">Berkas</label>
-                    <input type="file"/>
+                    <input type="file" name="berkas"/>
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label>
