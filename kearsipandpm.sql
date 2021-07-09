@@ -169,7 +169,7 @@ CREATE TABLE `rekap_anggota` (
 CREATE TABLE `rekap_organisasi` (
   `id` int(11) NOT NULL,
   `id_admin` int(11) NOT NULL,
-  `bulan` int(11) NOT NULL,
+  `bulan` varchar(60) NOT NULL,
   `berkas` mediumblob NOT NULL,
   `keterangan` mediumtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
