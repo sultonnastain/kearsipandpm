@@ -4,8 +4,9 @@
                         <th>No</th>
                         <th>ID admin</th>
                         <th>Nama </th>
-                        <th>Link</th>
-                        <th>Tanggal kegiatan</th>
+                        <th>Tunggakan</th>
+                        <th>Total</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
     </thead>
