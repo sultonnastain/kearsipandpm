@@ -1,6 +1,9 @@
-<link rel="stylesheet" href="<?=base_url()?>assets/css/contents.css">
-<style>
-  :root {
+/**
+ * @license Copyright (c) 2014-2021, CKSource - Frederico Knabben. All rights reserved.
+ * This file is licensed under the terms of the MIT License (see LICENSE.md).
+ */
+
+ :root {
 	--ck-sample-base-spacing: 2em;
 	--ck-sample-color-white: #fff;
 	--ck-sample-color-green: #279863;
@@ -9,7 +12,6 @@
 	--ck-sample-sidebar-width: 350px;
 	--ck-sample-editor-min-height: 400px;
 	--ck-sample-editor-z-index: 10;
-  --ck-toolbar-dropdown-max-width: 50vw;
 }
 
 /* --------- EDITOR STYLES  ---------------------------------------------------------------------------------------- */
@@ -29,9 +31,7 @@ main .ck-editor[role='application'] .ck.ck-content,
 	min-height: var(--ck-sample-editor-min-height);
 	padding: 1.5em 2em;
 }
-.ck.ck-balloon-panel {
-  z-index: 10054 !important;
-}
+
 .ck.ck-editor__editable {
 	background: #fff;
 	border: 1px solid hsl(0, 0%, 70%);
@@ -57,9 +57,9 @@ body[data-editor='DecoupledDocumentEditor'] .document-editor__toolbar {
 
 body[ data-editor='DecoupledDocumentEditor'] .collaboration-demo__editable,
 body[ data-editor='DecoupledDocumentEditor'] .row-editor .editor {
-	width: 22cm;
-	height: 14cm;
-	min-height: 14cm;
+	width: 18.5cm;
+	height: 100%;
+	min-height: 26.25cm;
 	padding: 1.75cm 1.5cm;
 	margin: 2.5rem;
 	border: 1px hsl( 0, 0%, 82.7% ) solid;
@@ -82,6 +82,68 @@ body[data-editor='DecoupledDocumentEditor'] .sidebar {
 	box-shadow: none;
 }
 
+/* --------- COMMENTS & TRACK CHANGES FEATURE ---------------------------------------------------------------------- */
+.sidebar {
+	padding: 0 15px;
+	position: relative;
+	min-width: var(--ck-sample-sidebar-width);
+	max-width: var(--ck-sample-sidebar-width);
+	font-size: 20px;
+	border: 1px solid hsl(0, 0%, 77%);
+	background: hsl(0, 0%, 98%);
+	border-left: 0;
+	overflow: hidden;
+	min-height: 100%;
+	flex-grow: 1;
+}
+
+/* Do not inherit styles related to the editable editor content. See line 25.*/
+.sidebar .ck-content[role='textbox'],
+.ck.ck-annotation-wrapper .ck-content[role='textbox'] {
+	min-height: unset;
+	width: unset;
+	padding: 0;
+	background: transparent;
+}
+
+.sidebar.narrow {
+	min-width: 60px;
+	flex-grow: 0;
+}
+
+.sidebar.hidden {
+	display: none !important;
+}
+
+#sidebar-display-toggle {
+	position: absolute;
+	z-index: 1;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	left: 15px;
+	top: 30px;
+	border: 0;
+	padding: 0;
+	color: hsl( 0, 0%, 50% );
+	transition: 250ms ease color;
+	background-color: transparent;
+}
+
+#sidebar-display-toggle:hover {
+	color: hsl( 0, 0%, 30% );
+	cursor: pointer;
+}
+
+#sidebar-display-toggle:focus,
+#sidebar-display-toggle:active {
+	outline: none;
+	border: 1px solid #a9d29d;
+}
+
+#sidebar-display-toggle svg {
+	fill: currentColor;
+}
 
 /* --------- COLLABORATION FEATURES (USERS) ------------------------------------------------------------------------ */
 .row-presence {
@@ -251,13 +313,102 @@ body[ data-editor='InlineEditor'] .collaboration-demo__row {
 }
 
 /* --------- SAMPLE GENERIC STYLES (not related to CKEditor) ------------------------------------------------------- */
+body, html {
+	padding: 0;
+	margin: 0;
+
+	font-family: sans-serif, Arial, Verdana, "Trebuchet MS", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+body {
+	height: 100%;
+	color: #2D3A4A;
+}
+
+body * {
+	box-sizing: border-box;
+}
+
+a {
+	color: #38A5EE;
+}
+
+header .centered {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 8em;
+}
+
+header h1 a {
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	color: #2D3A4A;
+	text-decoration: none;
+}
+
+header h1 img {
+	display: block;
+	height: 64px;
+}
+
+header nav ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+header nav ul li {
+	display: inline-block;
+}
+
+header nav ul li + li {
+	margin-left: 1em;
+}
+
+header nav ul li a {
+	font-weight: bold;
+	text-decoration: none;
+	color: #2D3A4A;
+}
+
+header nav ul li a:hover {
+	text-decoration: underline;
+}
+
+main .message {
+	padding: 0 0 var(--ck-sample-base-spacing);
+	background: var(--ck-sample-color-green);
+	color: var(--ck-sample-color-white);
+}
+
+main .message::after {
+	content: "";
+	z-index: -1;
+	display: block;
+	height: 10em;
+	width: 100%;
+	background: var(--ck-sample-color-green);
+	position: absolute;
+	left: 0;
+}
+
+main .message h2 {
+	position: relative;
+	padding-top: 1em;
+	font-size: 2em;
+}
 
 .centered {
 	/* Hide overlapping comments. */
 	overflow: hidden;
 	max-width: var(--ck-sample-container-width);
 	margin: 0 auto;
-	padding: 0 0.5em;
+	padding: 0 var(--ck-sample-base-spacing);
 }
 
 .row {
@@ -265,7 +416,7 @@ body[ data-editor='InlineEditor'] .collaboration-demo__row {
 	position: relative;
 }
 
-/* .btn {
+.btn {
 	cursor: pointer;
 	padding: 8px 16px;
 	font-size: 1rem;
@@ -276,21 +427,18 @@ body[ data-editor='InlineEditor'] .collaboration-demo__row {
 	border-color: var(--ck-sample-color-button-blue);
 	color: var(--ck-sample-color-white);
 	display: inline-block;
-} */
+}
 
-/* .btn--tiny {
+.btn--tiny {
 	padding: 6px 12px;
 	font-size: .8rem;
-} */
-.mgin {
-	margin-left : 1.6em;
-	margin-right : 1.6em;
 }
-.mgin2{
-	width:96%;
-}
-.tright{
-	margin-left: 1.6em;
+
+footer {
+	margin: calc(2*var(--ck-sample-base-spacing)) var(--ck-sample-base-spacing);
+	font-size: .8em;
+	text-align: center;
+	color: rgba(0,0,0,.4);
 }
 
 /* --------- RWD --------------------------------------------------------------------------------------------------- */
@@ -314,82 +462,4 @@ body[ data-editor='InlineEditor'] .collaboration-demo__row {
 	main .message h2 {
 		font-size: 1.5em;
 	}
-	.mgin {
-	margin-left : 0.5em;
-	margin-right : 0.5em;
-  }
-  .mgin2{
-	width:97%;
 }
-}
-
-  </style>
-<!-- Begin Page Content -->
-<div class="container-fluid">
-
-<!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Absensi dan Notulensi Rapat Besar DPM Vokasi UB</h1>
-<p class="mb-4">Berikut merupakan notulensi dan absensi kegiatan Rapat Besar DPM Vokasi Universitas Brawijaya.</p>
-
-<!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Masukkan data sesuai ketentuan</h6>
-    </div>
-    <div class="card-body">
-                <button class="btn btn-primary"data-toggle="modal" data-target="#modal-tambah"><i class="fa fa-plus"></i> Tambah Data</button>
-               <br><br>
-        <div id="tampil">
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modal-tambah">
-          <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Tambah Data Rabes</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form id="form-tambah">
-            <input type="hidden" name="id"/>
-            <div class="col-lg-12">
-                <div class="form-group">
-                    <label for="id_admin">ID admin</label>
-                    <!-- bagian foreavh di bawah digunakan untuk mendapatkan data penomoran-->
-                    <select class="form-control select2" name="id_admin" required id="id_admin">
-                    <?php foreach($admin as $row) : ?>
-                      <option value="<?php echo $row->id ?>"><?php echo $row->nama ?></option>
-                     <?php endforeach ?>
-                  </select>
-                </div>
-                <div class="form-group">
-                    <label for="nama">Agenda</label>
-                    <input type="text" class="form-control" autocomplete="off" name="nama" placeholder="Masukkan agenda rabes">
-                </div>
-                <label for="isi">Notulensi</label>
-                <div class="centered">
-                  <div class="row row-editor">
-                    <div class="editor">
-                    </div>
-                   </div>
-		         	  </div>
-                <div class="form-group">
-                    <label for="tanggal">Tanggal Rabes</label>
-                    <input type="date" class="form-control" autocomplete="off" name="tanggal" placeholder="Masukkan Tanggal Rabes">
-                </div>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-              <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
-            </div>
-            </form>
-          </div>
-          <!-- /.modal-content -->
-      </div>
-</div>
-<!-- /.container-fluid -->
-
-</div>
-<!-- End of Main Content -->

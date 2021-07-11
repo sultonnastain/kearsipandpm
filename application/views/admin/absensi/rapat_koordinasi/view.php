@@ -42,10 +42,13 @@
                     <label for="nama">Agenda</label>
                     <input type="text" class="form-control" autocomplete="off" name="nama" placeholder="Masukkan agenda rabes">
                 </div>
-                <div class="form-group">
-                    <label for="link">Notulensi</label>
-                    <input type="text" class="form-control" autocomplete="off" name="notulen" placeholder="Masukkan Notulensi">
-                </div>
+                <label for="isi">Notulensi</label>
+                <div class="centered">
+                  <div class="row row-editor">
+                    <div class="editor">
+                    </div>
+                   </div>
+		         	  </div>
                 <div class="form-group">
                     <label for="tanggal">Tanggal Rakor</label>
                     <input type="date" class="form-control" autocomplete="off" name="tanggal" placeholder="Masukkan Tanggal Rabes">
