@@ -374,7 +374,7 @@ body[ data-editor='InlineEditor'] .collaboration-demo__row {
                     <div class="editor">
                     </div>
                    </div>
-		         	  </div>
+                   </div>
                 <div class="form-group">
                     <label for="tanggal">Tanggal Rakor</label>
                     <input type="date" class="form-control" autocomplete="off" name="tanggal" placeholder="Masukkan Tanggal Rabes">
