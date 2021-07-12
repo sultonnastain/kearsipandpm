@@ -1,3 +1,4 @@
+<script src="<?=base_url()?>assets/vendor/ck-standart/build/ckeditor.js"></script>
 <script>
       let datack;
     ClassicEditor
@@ -152,8 +153,8 @@
        dataType: 'json',
        data: form.serialize()+ "&notulen="+ editorData,
       success: function(){ 
-        alert('success!');
         modal_tambah.modal('hide');
+		swal("Berhasil!", "Data Rapat Pleno Berhasil Ditambahkan.", "success");
         form[0].reset();
         $('#rapat_pleno').DataTable().clear().destroy();
         refresh_table();

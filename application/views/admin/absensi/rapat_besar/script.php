@@ -142,18 +142,25 @@
     };
     refresh_table();
   
-    $("#form-tambah").submit(function(e) {
-      e.preventDefault();
+    document.querySelector( '#submit_save' ).addEventListener( 'click', () => {
       modal_tambah = $("#modal-tambah");
       const editorData = datack.getData();
+	  var id_admin = $("#id_admin").val();
+	  var agenda = $("#agenda").val();
+	  var tanggal  = $("#tgl_rabes").val();
       form = $(this);
       $.ajax({
        url: '<?=site_url('rapat_besar/crud/insert')?>',
        type: 'POST',
        dataType: 'json',
-       data: form.serialize()+ "&notulen="+ editorData,
+	   data: {
+		   id_admin :id_admin,
+		   notulen : editorData,
+		   nama : agenda,
+		   tanggal : tanggal
+	   },
       success: function(){ 
-        alert('success!');
+		swal("Berhasil!", "Data Rapat Besar Berhasil Ditambahkan.", "success");
         modal_tambah.modal('hide');
         form[0].reset();
         $('#rapat_besar').DataTable().clear().destroy();

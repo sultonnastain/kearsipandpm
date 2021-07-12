@@ -2,7 +2,7 @@
     <thead>
         <tr>
                         <th>No</th>
-                        <th>ID admin</th>
+                        <th>Admin</th>
                         <th>Agenda</th>
                         <th>Notulensi</th>
                         <th>Tanggal Rabes</th>
@@ -14,7 +14,7 @@
         <?php foreach($rapat_besar->result() as $result) : ?>
         <tr>
             <td><?php echo $no++ ?></td>
-            <td><?php echo $result->id_admin ?></td>
+            <td><?php echo $result->nama_admin ?></td>
             <td><?php echo $result->nama ?></td>
             <td class="ck-content"><?php echo $result->notulen ?></td>
             <td><?php echo $result->tanggal ?></td>
@@ -35,8 +35,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form id="form-edit-rapat_besar">
-            <input type="hidden" name="id"/>
+            <input type="hidden" name="id" id="hidden_id"/>
             <div class="col-lg-12">
                <div class="form-group">
                     <label for="id_admin">ID admin</label>
@@ -48,7 +47,7 @@
                 </div>
                 <div class="form-group">
                     <label for="nama">Agenda</label>
-                    <input type="text" class="form-control" autocomplete="off" name="nama" placeholder="Masukkan Nama Agenda">
+                    <input type="text" class="form-control" autocomplete="off" id="agenda_edit" name="nama" placeholder="Masukkan Nama Agenda">
                 </div>
                 <label for="isi">Notulensi</label>
                 <div class="centered">
@@ -59,14 +58,13 @@
 		         	  </div>
                 <div class="form-group">
                     <label for="tanggal">Tanggal Rabes</label>
-                    <input type="date" class="form-control" autocomplete="off" name="tanggal" placeholder="Masukkan Tanggal Rabes">
+                    <input type="date" class="form-control" autocomplete="off" id="tgl_rabes_edit" name="tanggal" placeholder="Masukkan Tanggal Rabes">
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-              <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
+              <button type="submit" id="submit_edit" name="submit" class="btn btn-primary">Simpan</button>
             </div>
-            </form>
           </div>
           <!-- /.modal-content -->
       </div>
@@ -201,7 +199,7 @@
   } );
   //Menampilkan data diedit
     modal_edit = $("#modal-edit");
-    $(".edit-data").click(function(e) {
+    $(document).on('click', '.edit-data', function(e){ 
       id = $(this).data('id');
       $.ajax({
         url: '<?=site_url('rapat_besar/get_by_id')?>',
@@ -210,32 +208,40 @@
         data: {id: id},
       })
       .done(function(data) {
-        $("#form-edit-rapat_besar input[name='id']").val(data.object.id);
+        $("#hidden_id").val(data.object.id);
         // $("#form-edit-rapat_besar input[name='id_admin']").val(data.object.id_admin);
         //untuk dropdown di bawah
         $("#id_admin_edit").val(data.object.id_admin);
+        $("#agenda_edit").val(data.object.nama);
+        $("#tgl_rabes_edit").val(data.object.tanggal);
         $("#form-edit-rapat_besar input[name='nama']").val(data.object.nama);
         datack_edit.setData(data.object.notulen);
-        $("#form-edit-rapat_besar input[name='tanggal']").val(data.object.tanggal);
         modal_edit.modal('show').on('shown.bs.modal', function(e) {
           $("#form-edit-rapat_besar input[name='id']").focus();
         });
       });
     });
     //Proses Update ke Db
-    $("#form-edit-rapat_besar").submit(function(e) {
-    e.preventDefault();
+    document.querySelector( '#submit_edit' ).addEventListener( 'click', () => {
     const editorData = datack_edit.getData();
-    form = $(this);
+    var id_admin = $("#id_admin_edit").val();
+	  var agenda = $("#agenda_edit").val();
+	  var tanggal  = $("#tgl_rabes_edit").val();
+    var id  = $("#hidden_id").val();
     $.ajax({
       url: '<?=site_url('rapat_besar/crud/update')?>',
       type: 'POST',
       dataType: 'json',
-      data: form.serialize()+"&notulen="+ editorData,
+      data: {
+       id : id,
+		   id_admin :id_admin,
+		   notulen : editorData,
+		   nama : agenda,
+		   tanggal : tanggal
+	    },
       success: function(data){ 
-        form[0].reset();
-        alert('success!');
         modal_edit.modal('hide');
+        swal("Berhasil!", "Data rapat besar berhasil diedit.", "success");
         $('#rapat_besar').DataTable().clear().destroy();
         refresh_table();
       },
@@ -244,24 +250,39 @@
       }
      })
     });
-    $(".hapus-data").click(function(e) {
-      e.preventDefault();
+    $(document).on('click', '.hapus-data', function(e){ 
       id = $(this).data('id');
-      if (confirm("Anda yakin menghapus data ini?")) {
-        $.ajax({
-          url: '<?=site_url('rapat_besar/crud/delete')?>',
-          type: 'POST',
-          dataType: 'json',
-          data: {id: id},
-          success: function(data){ 
-          $('#rapat_besar').DataTable().clear().destroy();
-          refresh_table();
-          },
-          error: function(response){
-          alert(response);
-          }
-        })
-      }
+      swal({
+        title: "Apa Anda Yakin?",
+        text: "Data yang terhapus,tidak dapat dikembalikan!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Batalkan!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+             url: '<?=site_url('rapat_besar/crud/delete')?>',
+             type: 'POST',
+             dataType: 'json',
+             data: {id: id},
+             error: function() {
+                alert('Something is wrong');
+             },
+             success: function(data) {
+                  swal("Berhasil!", "Data Berhasil Dihapus.", "success");
+                  $('#siswa').DataTable().clear().destroy();
+                  refresh_table();
+             }
+          });
+        } else {
+          swal("Dibatalkan", "Data yang dipilih tidak jadi dihapus", "error");
+        }
+      });
     });
     
 </script>
