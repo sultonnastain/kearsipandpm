@@ -352,7 +352,6 @@ body[ data-editor='InlineEditor'] .collaboration-demo__row {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form id="form-tambah">
             <input type="hidden" name="id"/>
             <div class="col-lg-12">
                 <div class="form-group">
@@ -366,7 +365,7 @@ body[ data-editor='InlineEditor'] .collaboration-demo__row {
                 </div>
                 <div class="form-group">
                     <label for="nama">Agenda</label>
-                    <input type="text" class="form-control" autocomplete="off" name="nama" placeholder="Masukkan agenda rabes">
+                    <input type="text" class="form-control" autocomplete="off" name="nama" id="agenda" placeholder="Masukkan agenda rabes">
                 </div>
                 <label for="isi">Notulensi</label>
                 <div class="centered">
@@ -377,14 +376,13 @@ body[ data-editor='InlineEditor'] .collaboration-demo__row {
 		         	  </div>
                 <div class="form-group">
                     <label for="tanggal">Tanggal Pleno</label>
-                    <input type="date" class="form-control" autocomplete="off" name="tanggal" placeholder="Masukkan Tanggal Pleno">
+                    <input type="date" class="form-control" autocomplete="off" name="tanggal" id="tgl_pleno" placeholder="Masukkan Tanggal Pleno">
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-              <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
+              <button id="submit_save" type="submit" name="submit" class="btn btn-primary">Simpan</button>
             </div>
-            </form>
           </div>
           <!-- /.modal-content -->
       </div>
