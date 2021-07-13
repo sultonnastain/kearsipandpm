@@ -62,7 +62,7 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href=<?php echo form_close(); ?> method="post"> method="post"> class="btn btn-primary btn-user btn-block">
+                                        <a href=<?php echo form_close(); ?> method="post" class="btn btn-primary btn-user btn-block">
                                             Login
                                             <?php echo form_close(); ?>
                                         </a>
