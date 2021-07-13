@@ -142,20 +142,25 @@
     };
     refresh_table();
   
-    $("#form-tambah").submit(function(e) {
-      e.preventDefault();
+	document.querySelector( '#submit_save' ).addEventListener( 'click', () => {
       const editorData = datack.getData();
       modal_tambah = $("#modal-tambah");
-      form = $(this);
+	  var id_admin = $("#id_admin").val();
+	  var agenda = $("#agenda").val();
+	  var tanggal  = $("#tgl_rakor").val();
       $.ajax({
        url: '<?=site_url('rapat_koordinasi/crud/insert')?>',
        type: 'POST',
        dataType: 'json',
-       data: form.serialize()+ "&notulen="+ editorData,
+	   data: {
+		   id_admin :id_admin,
+		   notulen : editorData,
+		   nama : agenda,
+		   tanggal : tanggal
+	   },
       success: function(){ 
         modal_tambah.modal('hide');
 		swal("Berhasil!", "Data Rapat Koordinasi Berhasil Ditambahkan.", "success");
-        form[0].reset();
         $('#rapat_koordinasi').DataTable().clear().destroy();
         refresh_table();
       },

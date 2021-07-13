@@ -47,7 +47,7 @@
                 </div>
                 <div class="form-group">
                     <label for="nama">Agenda</label>
-                    <input type="text" class="form-control" autocomplete="off" id="agenda_edit" name="nama" placeholder="Masukkan Nama Agenda">
+                    <input type="text" class="form-control" autocomplete="off" id="agenda_edit"  placeholder="Masukkan Nama Agenda">
                 </div>
                 <label for="isi">Notulensi</label>
                 <div class="centered">
@@ -58,7 +58,7 @@
 		         	  </div>
                 <div class="form-group">
                     <label for="tanggal">Tanggal Rabes</label>
-                    <input type="date" class="form-control" autocomplete="off" id="tgl_rabes_edit" name="tanggal" placeholder="Masukkan Tanggal Rabes">
+                    <input type="date" class="form-control" autocomplete="off" id="tgl_rabes_edit"  placeholder="Masukkan Tanggal Rabes">
                 </div>
             </div>
             <div class="modal-footer justify-content-between">

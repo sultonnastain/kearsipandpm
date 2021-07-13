@@ -2,7 +2,7 @@
     <thead>
         <tr>
                         <th>No</th>
-                        <th>ID admin</th>
+                        <th>Admin</th>
                         <th>Agenda</th>
                         <th>Notulensi</th>
                         <th>Tanggal Koordinasi</th>
@@ -14,7 +14,7 @@
         <?php foreach($rapat_koordinasi->result() as $result) : ?>
         <tr>
             <td><?php echo $no++ ?></td>
-            <td><?php echo $result->id_admin ?></td>
+            <td><?php echo $result->nama_admin ?></td>
             <td><?php echo $result->nama ?></td>
             <td class="ck-content"><?php echo $result->notulen ?></td>
             <td><?php echo $result->tanggal ?></td>
@@ -35,8 +35,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form id="form-edit-rapat_koordinasi">
-            <input type="hidden" name="id"/>
+            <input type="hidden" id="hidden_id" name="id"/>
             <div class="col-lg-12">
                <div class="form-group">
                     <label for="id_admin">ID admin</label>
@@ -48,7 +47,7 @@
                 </div>
                 <div class="form-group">
                     <label for="nama">Agenda</label>
-                    <input type="text" class="form-control" autocomplete="off" name="nama" placeholder="Masukkan Nama Agenda">
+                    <input type="text" class="form-control" autocomplete="off" id="agenda_edit" name="nama" placeholder="Masukkan Nama Agenda">
                 </div>
                 <label for="isi">Notulensi</label>
                 <div class="centered">
@@ -58,15 +57,14 @@
                 </div>
 		         	  </div>
                 <div class="form-group">
-                    <label for="tanggal">Tanggal Rabes</label>
-                    <input type="date" class="form-control" autocomplete="off" name="tanggal" placeholder="Masukkan Tanggal Rabes">
+                    <label for="tanggal">Tanggal Rakor</label>
+                    <input type="date" class="form-control" autocomplete="off" id="tgl_rakor_edit" name="tanggal" placeholder="Masukkan Tanggal Rabes">
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-              <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
+              <button type="submit" id="submit_edit" name="submit" class="btn btn-primary">Simpan</button>
             </div>
-            </form>
           </div>
           <!-- /.modal-content -->
       </div>
@@ -201,7 +199,7 @@
   } );
   //Menampilkan data diedit
     modal_edit = $("#modal-edit");
-    $(".edit-data").click(function(e) {
+    $(document).on('click', '.edit-data', function(e){ 
       id = $(this).data('id');
       $.ajax({
         url: '<?=site_url('rapat_koordinasi/get_by_id')?>',
@@ -210,30 +208,37 @@
         data: {id: id},
       })
       .done(function(data) {
-        $("#form-edit-rapat_koordinasi input[name='id']").val(data.object.id);
-        // $("#form-edit-rapat_koordinasi input[name='id_admin']").val(data.object.id_admin);
+        $("#hidden_id").val(data.object.id);
+        // $("#form-edit-rapat_besar input[name='id_admin']").val(data.object.id_admin);
         //untuk dropdown di bawah
         $("#id_admin_edit").val(data.object.id_admin);
-        $("#form-edit-rapat_koordinasi input[name='nama']").val(data.object.nama);
+        $("#agenda_edit").val(data.object.nama);
+        $("#tgl_rakor_edit").val(data.object.tanggal);
         datack_edit.setData(data.object.notulen);
-        $("#form-edit-rapat_koordinasi input[name='tanggal']").val(data.object.tanggal);
         modal_edit.modal('show').on('shown.bs.modal', function(e) {
           $("#form-edit-rapat_koordinasi input[name='id']").focus();
         });
       });
     });
     //Proses Update ke Db
-    $("#form-edit-rapat_koordinasi").submit(function(e) {
-    e.preventDefault();
+    document.querySelector( '#submit_edit' ).addEventListener( 'click', () => {
     const editorData = datack_edit.getData();
-    form = $(this);
+    var id_admin = $("#id_admin_edit").val();
+	  var agenda = $("#agenda_edit").val();
+	  var tanggal  = $("#tgl_rakor_edit").val();
+    var id  = $("#hidden_id").val();
     $.ajax({
       url: '<?=site_url('rapat_koordinasi/crud/update')?>',
       type: 'POST',
       dataType: 'json',
-      data: form.serialize()+"&notulen="+ editorData,
+      data: {
+       id : id,
+		   id_admin :id_admin,
+		   notulen : editorData,
+		   nama : agenda,
+		   tanggal : tanggal
+	    },
       success: function(data){ 
-        form[0].reset();
         modal_edit.modal('hide');
         swal("Berhasil!", "Data rapat koordinasi berhasil diedit.", "success");
         $('#rapat_koordinasi').DataTable().clear().destroy();
@@ -244,7 +249,7 @@
       }
      })
     });
-    $(".hapus-data").click(function(e) {
+    $(document).on('click', '.hapus-data', function(e){ 
       e.preventDefault();
       id = $(this).data('id');
       swal({

@@ -19,8 +19,9 @@ class RapatkoordinasiModel extends CI_Model {
 		return $this->db->delete($this->table, array('id' => $id));
 	}
 	public function get_all(){
-		$this->db->select('*');
-		$this->db->from('rapat_koordinasi');
+		$this->db->select('r.*,a.nama as nama_admin');
+		$this->db->from('rapat_koordinasi r');
+		$this->db->join('admin a','r.id_admin=a.id');
 		return $this->db->get();
 	}
 	public function get_by_id($id)

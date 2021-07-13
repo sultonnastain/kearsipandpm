@@ -162,7 +162,6 @@
       success: function(){ 
 		swal("Berhasil!", "Data Rapat Besar Berhasil Ditambahkan.", "success");
         modal_tambah.modal('hide');
-        form[0].reset();
         $('#rapat_besar').DataTable().clear().destroy();
         refresh_table();
       },
