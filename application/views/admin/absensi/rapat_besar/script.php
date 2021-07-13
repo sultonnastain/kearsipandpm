@@ -141,6 +141,10 @@
       });
     };
     refresh_table();
+	$('#id_penomoran').select2({
+      theme: 'bootstrap4',
+      placeholder: "Pilih Id Penomoran"
+    });
   
     document.querySelector( '#submit_save' ).addEventListener( 'click', () => {
       modal_tambah = $("#modal-tambah");
