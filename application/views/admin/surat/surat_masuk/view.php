@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group">
                     <label for="link">Link Drive Proposal</label>
-                    <input type="text" class="form-control" autocomplete="off" name="link" placeholder="Masukkan Link drive Proposal">
+                    <input type="text" class="form-control" autocomplete="off" name="link" placeholder="Masukkan Link drive Surat Masuk">
                 </div>
                 <div class="form-group">
                     <label for="link">Tanggal Kegiatan</label>
