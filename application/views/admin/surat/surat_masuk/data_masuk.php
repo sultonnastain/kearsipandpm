@@ -135,7 +135,7 @@
              },
              success: function(data) {
                   swal("Berhasil!", "Data Berhasil Dihapus.", "success");
-                  $('#siswa').DataTable().clear().destroy();
+                  $('#surat_masuk').DataTable().clear().destroy();
                   refresh_table();
              }
           });

@@ -278,7 +278,7 @@
              },
              success: function(data) {
                   swal("Berhasil!", "Data Berhasil Dihapus.", "success");
-                  $('#siswa').DataTable().clear().destroy();
+                  $('#rapat_pleno').DataTable().clear().destroy();
                   refresh_table();
              }
           });

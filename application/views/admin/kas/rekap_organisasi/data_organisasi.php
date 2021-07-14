@@ -1,8 +1,13 @@
+<style>
+.btn2{
+  font-weight:900;
+}
+</style>
 <table id="rekap_organisasi" class="table table-bordered table-striped">
     <thead>
         <tr>
                         <th>No</th>
-                        <th>ID admin</th>
+                        <th>Admin</th>
                         <th>Bulan</th>
                         <th>Berkas</th>
                         <th>Keterangan</th>
@@ -14,11 +19,12 @@
         <?php foreach($rekap_organisasi->result() as $result) : ?>
         <tr>
             <td><?php echo $no++ ?></td>
-            <td><?php echo $result->id_admin ?></td>
+            <td><?php echo $result->nama_admin ?></td>
             <td><?php echo $result->bulan?></td>
             <td><?php echo $result->berkas ?></td>
             <td><?php echo $result->keterangan ?></td>
             <td class="text-center">
+            <i class="btn btn2 btn-xs btn-primary fa fa-file-download dawnload-data" data-id="<?php echo $result->id ?>" data-placement="top" title="Dawnload"></i>
                 <i class="btn btn-xs btn-primary fa fa-edit edit-data" data-id="<?php echo $result->id ?>" data-placement="top" title="Edit"></i>
                 <i class="btn btn-xs btn-danger fas fa-trash-alt hapus-data" data-id="<?php echo $result->id ?>" data-placement="top" title="Delete"></i>
             </td>
@@ -51,8 +57,9 @@
                     <input type="text" class="form-control" autocomplete="off" name="bulan" placeholder="Masukkan Nama bulan">
                 </div>
                 <div class="form-group">
-                    <label for="berkas">Berkas</label>
+                    <label for="berkas">Berkas(Kosongkan bila file tidak diganti)</label></br>
                     <input type="file" name="berkas"/>
+                    <p id="p_nama_berkas"></p>
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label>
@@ -86,8 +93,12 @@
         // $("#form-edit-rekap_organisasi input[name='id_admin']").val(data.object.id_admin);
         //untuk dropdown di bawah
         $("#id_admin_edit").val(data.object.id_admin);
+        $('#id_admin_edit').select2({
+          theme: 'bootstrap4'
+        });
         $("#form-edit-rekap_organisasi input[name='bulan']").val(data.object.bulan);
-        $("#form-edit-rekap_organisasi input[name='berkas']").val(data.object.berkas);
+        $("#p_nama_berkas").text("Berkas Terupload : "+data.object.berkas);
+        // $("#form-edit-rekap_organisasi input[name='berkas']").val(data.object.berkas);
         $("#form-edit-rekap_organisasi input[name='keterangan']").val(data.object.keterangan);
         modal_edit.modal('show').on('shown.bs.modal', function(e) {
           $("#form-edit-rekap_organisasi input[name='id']").focus();
@@ -102,11 +113,15 @@
       url: '<?=site_url('rekap_organisasi/crud/update')?>',
       type: 'POST',
       dataType: 'json',
-      data: form.serialize(),
+      data:new FormData(this),
+      processData:false,
+      contentType:false,
+      cache:false,
+      async:false,
       success: function(data){ 
         form[0].reset();
-        alert('success!');
         modal_edit.modal('hide');
+        swal("Berhasil!", "Data rekap kas organisasi berhasil diedit.", "success");
         $('#rekap_organisasi').DataTable().clear().destroy();
         refresh_table();
       },
@@ -118,21 +133,42 @@
     $(".hapus-data").click(function(e) {
       e.preventDefault();
       id = $(this).data('id');
-      if (confirm("Anda yakin menghapus data ini?")) {
-        $.ajax({
-          url: '<?=site_url('rekap_organisasi/crud/delete')?>',
-          type: 'POST',
-          dataType: 'json',
-          data: {id: id},
-          success: function(data){ 
-          $('#rekap_organisasi').DataTable().clear().destroy();
-          refresh_table();
-          },
-          error: function(response){
-          alert(response);
-          }
-        })
-      }
+      swal({
+        title: "Apa Anda Yakin?",
+        text: "Data yang terhapus,tidak dapat dikembalikan!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Batalkan!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+             url: '<?=site_url('rekap_organisasi/crud/delete')?>',
+             type: 'POST',
+             dataType: 'json',
+             data: {id: id},
+             error: function() {
+                alert('Something is wrong');
+             },
+             success: function(data) {
+                  swal("Berhasil!", "Data Berhasil Dihapus.", "success");
+                  $('#rekap_organisasi').DataTable().clear().destroy();
+                  refresh_table();
+             }
+          });
+        } else {
+          swal("Dibatalkan", "Data yang dipilih tidak jadi dihapus", "error");
+        }
+      });
+    });
+    var base_url = "<?php echo base_url();?>";
+    $(".dawnload-data").click(function(e) {
+      id = $(this).data('id');
+      location.href = base_url+`rekap_organisasi/download/${id}`;
     });
     
 </script>

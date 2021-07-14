@@ -13,6 +13,10 @@
       });
     };
     refresh_table();
+    $('#id_admin').select2({
+      theme: 'bootstrap4',
+      placeholder: "Pilih Admin"
+    });
   
     $("#form-tambah").submit(function(e) {
       e.preventDefault();
@@ -28,8 +32,8 @@
        cache:false,
        async:false,
       success: function(){ 
-        alert('success!');
         modal_tambah.modal('hide');
+        swal("Berhasil!", "Data Rekap Organisasi Berhasil Ditambahkan.", "success");
         form[0].reset();
         $('#rekap_organisasi').DataTable().clear().destroy();
         refresh_table();

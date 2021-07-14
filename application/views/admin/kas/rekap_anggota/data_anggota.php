@@ -154,7 +154,7 @@
              },
              success: function(data) {
                   swal("Berhasil!", "Data Berhasil Dihapus.", "success");
-                  $('#siswa').DataTable().clear().destroy();
+                  $('#rekap_anggota').DataTable().clear().destroy();
                   refresh_table();
              }
           });

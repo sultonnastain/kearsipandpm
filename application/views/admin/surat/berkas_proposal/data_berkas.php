@@ -144,7 +144,7 @@
              },
              success: function(data) {
                   swal("Berhasil!", "Data Berhasil Dihapus.", "success");
-                  $('#siswa').DataTable().clear().destroy();
+                  $('#berkas_proposal').DataTable().clear().destroy();
                   refresh_table();
              }
           });

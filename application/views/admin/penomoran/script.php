@@ -24,8 +24,8 @@
        dataType: 'json',
        data: form.serialize(),
       success: function(){ 
-        alert('success!');
         modal_tambah.modal('hide');
+        swal("Berhasil!", "Data Penomoran Berhasil Ditambahkan.", "success");
         form[0].reset();
         $('#penomoran').DataTable().clear().destroy();
         refresh_table();
