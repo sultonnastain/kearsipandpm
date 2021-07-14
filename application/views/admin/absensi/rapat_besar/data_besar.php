@@ -39,7 +39,7 @@
             <div class="col-lg-12">
                <div class="form-group">
                     <label for="id_admin">ID admin</label>
-                    <select class="form-control select2" name="id_admin" required id="id_admin_edit">
+                    <select class="form-control select2" name="id_admin" required id="id_admin_edit" style="width: 100%;">
                     <?php foreach($admin as $row) : ?>
                       <option value="<?php echo $row->id ?>"><?php echo $row->nama ?></option>
                      <?php endforeach ?>
