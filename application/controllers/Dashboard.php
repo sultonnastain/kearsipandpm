@@ -8,6 +8,9 @@ class Dashboard extends CI_Controller {
         $this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->database();
+		 if($this->session->userdata('masuk') != TRUE){
+			            redirect('login');
+		}
 	}
 	public function index()
 	{

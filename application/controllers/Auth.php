@@ -1,14 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Auth extends CI_Controller {
+public function __construct(){
+    parent::__construct();
+    $this->load->helper('url');
+    $this->load->helper('form');
+    $this->load->model('model_user');
+    $this->load->database();
+}
 public function index() {
-$this->load->view('admin/auth/login.php');
+$this->load->view('auth/login.php');
 }
 public function cek_login() {
-    $this->load->helper('form');
 $data = array('username' => $this->input->post('username', TRUE),
 'password' => $this->input->post('password')
 );
-$this->load->model('model_user'); // load model_user
 $hasil = $this->model_user->cek_user($data);
 if ($hasil->num_rows() == 1) {
 

@@ -41,9 +41,8 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Selamat Datang di Portal Kearsipan DPM Vokasi UB</h1>
                                     </div>
-                                    <form class="user">
+                                    <form method="post"  action="<?php echo base_url()?>login/auth">
                                         <div class="form-group">
-                                        <?php echo form_open("auth/cek_login"); ?>
                                             <input type="text" class="form-control form-control-user"
                                                 id="username" 
                                                 name="username"
@@ -62,13 +61,10 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href=<?php echo form_close(); ?> method="post" class="btn btn-primary btn-user btn-block">
+                                        <button class="btn btn-primary btn-user btn-block" type="submit">
                                             Login
-                                            <?php echo form_close(); ?>
-                                        </a>
-                                       
+</button>
                                     </form>
-                                    
                                 </div>
                             </div>
                         </div>
