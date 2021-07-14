@@ -95,8 +95,7 @@ class Template_surat extends CI_Controller {
 			}
 		}
 	}
-	public function download(){
-		$id = $this->input->post('id');
+	public function download($id){
 		$this->load->helper('file'); // Load file helper
         $file = $this->db->get_where('template_surat',['id' => $id])->row();; //Get file by id
         $data = read_file(FCPATH . "uploads/".$patch->berkas); // Use file helper to read the file's

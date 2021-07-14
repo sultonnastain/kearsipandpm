@@ -142,23 +142,10 @@
         }
       });
     });
+    var base_url = "<?php echo base_url();?>";
     $(".dawnload-data").click(function(e) {
-      e.preventDefault();
       id = $(this).data('id');
-        $.ajax({
-          url: '<?=site_url('template_surat/crud/dawnload')?>',
-          type: 'POST',
-          data: {id: id},
-          processData:false,
-          contentType:false,
-          cache:false,
-          async:false,
-          success: function(data){ 
-          },
-          error: function(response){
-          alert(response);
-          }
-        })
+      location.href = base_url+`template_surat/download/${id}`;
     });
     
 </script>
