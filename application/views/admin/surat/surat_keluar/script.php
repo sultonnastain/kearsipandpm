@@ -28,8 +28,8 @@
        dataType: 'json',
        data: form.serialize(),
       success: function(){ 
-        swal("Berhasil!", "Data Surat Keluar Berhasil Ditambahkan.", "success");
         modal_tambah.modal('hide');
+        swal("Berhasil!", "Data Surat Keluar Berhasil Ditambahkan.", "success");
         form[0].reset();
         $('#surat_keluar').DataTable().clear().destroy();
         refresh_table();

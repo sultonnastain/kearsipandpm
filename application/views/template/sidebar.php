@@ -127,13 +127,14 @@
                 <span>Penomoran Berkas</span></a>
         </li>
 
-
+        <?php if ($this->session->userdata('level')=='kabiro') : ?>
         <!-- Nav Item - Tables -->
         <li class="nav-item <?= in_array($page, $data_akun)  ? "active" : ""  ?>">
             <a class="nav-link" href="<?= base_url('pengelolaan_akun')?>">
             <i class="fas fa-user-plus"></i>
                 <span>Pengelolaan akun</span></a>
         </li>
+        <?php endif; ?>
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
