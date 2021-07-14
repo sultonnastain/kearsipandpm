@@ -39,7 +39,7 @@
             <div class="col-lg-12">
                <div class="form-group">
                     <label for="id_admin">ID admin</label>
-                    <select class="form-control select2" name="id_admin" required id="id_admin_edit">
+                    <select class="form-control select2" name="id_admin" required id="id_admin_edit" style="width: 100%;">
                     <?php foreach($admin as $row) : ?>
                       <option value="<?php echo $row->id ?>"><?php echo $row->nama ?></option>
                      <?php endforeach ?>
@@ -215,6 +215,9 @@
         $("#agenda_edit").val(data.object.nama);
         $("#tgl_pleno_edit").val(data.object.tanggal);
         $("#form-edit-rapat_besar input[name='nama']").val(data.object.nama);
+        $('#id_admin_edit').select2({
+          theme: 'bootstrap4'
+        });
         datack_edit.setData(data.object.notulen);
         modal_edit.modal('show').on('shown.bs.modal', function(e) {
           $("#form-edit-rapat_pleno input[name='id']").focus();

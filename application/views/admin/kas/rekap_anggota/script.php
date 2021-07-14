@@ -13,7 +13,10 @@
       });
     };
     refresh_table();
-  
+    $('#id_admin').select2({
+      theme: 'bootstrap4',
+      placeholder: "Pilih Admin"
+    });
     $("#form-tambah").submit(function(e) {
       e.preventDefault();
       modal_tambah = $("#modal-tambah");
@@ -24,8 +27,8 @@
        dataType: 'json',
        data: form.serialize(),
       success: function(){ 
-        alert('success!');
         modal_tambah.modal('hide');
+        swal("Berhasil!", "Data Rekap Kas Anggota Berhasil Ditambahkan.", "success");
         form[0].reset();
         $('#rekap_anggota').DataTable().clear().destroy();
         refresh_table();

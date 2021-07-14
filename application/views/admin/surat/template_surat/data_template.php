@@ -46,8 +46,9 @@
                 </div>
                 <!-- code masih salah -->
                 <div class="form-group">
-                    <label for="berkas">Berkas</label>
-                    <input type="file"/>
+                    <label for="berkas">Berkas(Kosongkan bila file tidak diganti)</label></br>
+                    <input type="file" name="berkas"/>
+                    <p id="p_nama_berkas"></p>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
@@ -75,7 +76,7 @@
       .done(function(data) {
         $("#form-edit-template_surat input[name='id']").val(data.object.id);
         $("#form-edit-template_surat input[name='jenis_kegiatan']").val(data.object.jenis_kegiatan);
-        $("#form-edit-template_surat input[name='berkas']").val(data.object.berkas);
+        $("#p_nama_berkas").text("Berkas Terupload : "+data.object.berkas);
         modal_edit.modal('show').on('shown.bs.modal', function(e) {
           $("#form-edit-template_surat input[name='id']").focus();
         });
@@ -89,11 +90,15 @@
       url: '<?=site_url('template_surat/crud/update')?>',
       type: 'POST',
       dataType: 'json',
-      data: form.serialize(),
+      data:new FormData(this),
+      processData:false,
+      contentType:false,
+      cache:false,
+      async:false,
       success: function(data){ 
         form[0].reset();
-        alert('success!');
         modal_edit.modal('hide');
+        swal("Berhasil!", "Data template surat berhasil diedit.", "success");
         $('#template_surat').DataTable().clear().destroy();
         refresh_table();
       },
@@ -105,29 +110,49 @@
     $(".hapus-data").click(function(e) {
       e.preventDefault();
       id = $(this).data('id');
-      if (confirm("Anda yakin menghapus data ini?")) {
-        $.ajax({
-          url: '<?=site_url('template_surat/crud/delete')?>',
-          type: 'POST',
-          dataType: 'json',
-          data: {id: id},
-          success: function(data){ 
-          $('#template_surat').DataTable().clear().destroy();
-          refresh_table();
-          },
-          error: function(response){
-          alert(response);
-          }
-        })
-      }
+      swal({
+        title: "Apa Anda Yakin?",
+        text: "Data yang terhapus,tidak dapat dikembalikan!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Batalkan!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+             url: '<?=site_url('template_surat/crud/delete')?>',
+             type: 'POST',
+             dataType: 'json',
+             data: {id: id},
+             error: function() {
+                alert('Something is wrong');
+             },
+             success: function(data) {
+                  swal("Berhasil!", "Data Berhasil Dihapus.", "success");
+                  $('#siswa').DataTable().clear().destroy();
+                  refresh_table();
+             }
+          });
+        } else {
+          swal("Dibatalkan", "Data yang dipilih tidak jadi dihapus", "error");
+        }
+      });
     });
     $(".dawnload-data").click(function(e) {
       e.preventDefault();
       id = $(this).data('id');
         $.ajax({
           url: '<?=site_url('template_surat/crud/dawnload')?>',
-          type: 'GET',
+          type: 'POST',
           data: {id: id},
+          processData:false,
+          contentType:false,
+          cache:false,
+          async:false,
           success: function(data){ 
           },
           error: function(response){

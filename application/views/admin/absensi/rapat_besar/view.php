@@ -358,6 +358,7 @@ body[ data-editor='InlineEditor'] .collaboration-demo__row {
                     <label for="id_admin">ID admin</label>
                     <!-- bagian foreavh di bawah digunakan untuk mendapatkan data penomoran-->
                     <select class="form-control select2" name="id_admin" required id="id_admin" style="width: 100%;">
+					<option value="">Pilih Admin</option>
                     <?php foreach($admin as $row) : ?>
                       <option value="<?php echo $row->id ?>"><?php echo $row->nama ?></option>
                      <?php endforeach ?>

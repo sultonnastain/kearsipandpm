@@ -27,8 +27,8 @@
        cache:false,
        async:false,
       success: function(){ 
-        alert('success!');
         modal_tambah.modal('hide');
+        swal("Berhasil!", "Data Template Surat Berhasil Ditambahkan.", "success");
         form[0].reset();
         $('#template_surat').DataTable().clear().destroy();
         refresh_table();

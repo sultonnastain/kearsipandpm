@@ -141,6 +141,10 @@
       });
     };
     refresh_table();
+	$('#id_admin').select2({
+      theme: 'bootstrap4',
+      placeholder: "Pilih Admin"
+    });
   
 	document.querySelector( '#submit_save' ).addEventListener( 'click', () => {
       const editorData = datack.getData();

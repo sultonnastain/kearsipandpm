@@ -141,9 +141,9 @@
       });
     };
     refresh_table();
-	$('#id_penomoran').select2({
+	$('#id_admin').select2({
       theme: 'bootstrap4',
-      placeholder: "Pilih Id Penomoran"
+      placeholder: "Pilih Admin"
     });
   
     document.querySelector( '#submit_save' ).addEventListener( 'click', () => {

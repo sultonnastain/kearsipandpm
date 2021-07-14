@@ -9,7 +9,6 @@ class Template_surat extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->model('TemplatesuratModel');
 		$this->load->library('upload');
-		$this->load->helper('download');
 		$this->load->database();
 	}
 	public function index()
@@ -37,9 +36,7 @@ class Template_surat extends CI_Controller {
 				$date->setTimeZone($timezone);
 				$config['upload_path']          = './uploads/';
 				$config['allowed_types']        = 'pdf|doc|docx|xslsx';
-				$config['max_size']             = 10240;
-				$config['width']                = 300;
-                $config['height']               = 400;
+				$config['max_size']             = 100240;
 				$filename =  date("Y-m-d_His") . '-' . $_FILES['berkas']['name'];
 				$config['file_name'] =$filename;
 				$this->upload->initialize($config); 
@@ -56,17 +53,36 @@ class Template_surat extends CI_Controller {
 		}
 		else if ($mode == 'update') {
 			if ($this->input->is_ajax_request()) {
-				$id = $this->input->get('id');
-				if (!empty($_FILES["berkas"]["name"])) {
-					$this->berkas = $this->_uploadBerkas();
-				} else {
-					$this->image = $post["old_image"];
-				}
+				$id = $this->input->post('id');
 				$data = array(
-					'id' => $this->input->post('id'),
-					'jenis_kegiatan' => $this->input->post('jenis_kegiatan'),
-					
+					'jenis_kegiatan' => $this->input->post('jenis_kegiatan')
 				);
+				if (empty($_FILES['berkas']['name'])) 
+				{
+				}
+				else
+				{	
+					$patch = $this->db->get_where('template_surat',['id' => $id])->row();
+					if($patch){
+					  $path = FCPATH . "uploads/".$patch->berkas;
+					  if(file_exists($path)){
+						unset($path);
+					  }else{
+					  }
+				    }
+					$timezone = new DateTimeZone('Asia/Jakarta');
+					$date = new DateTime();
+					$date->setTimeZone($timezone);
+					$config['upload_path']          = './uploads/';
+					$config['allowed_types']        = 'pdf|doc|docx|xslsx';
+					$config['max_size']             = 100240;
+					$filename =  date("Y-m-d_His") . '-' . $_FILES['berkas']['name'];
+					$config['file_name'] =$filename;
+					$this->upload->initialize($config); 
+					if($this->upload->do_upload("berkas")){ 
+						$data['berkas'] = $filename;
+					}
+				}
 				$result = $this->TemplatesuratModel->update($data, $id);
 				echo json_encode($result);
 			}
@@ -77,37 +93,15 @@ class Template_surat extends CI_Controller {
 				$result = $this->TemplatesuratModel->delete($id);
 				echo json_encode($result);
 			}
-			function _uploadBerkas()
-			{
-				$config['upload_path']         = './upload';
-				$config['allowed_types']       = 'xls|docx|pdf';
-				$config['file_name']           = $string->id;
-				$config['overwrite']           = true;
-				$config['max_size']            = 2000000;
-				
-				$this->load->library('upload' , $config);
-		
-				if ($this->upload->do_upload('berkas')) {
-					return $this->upload->data("file name");
-				}
-				return "0";
-			}
 		}
-		else if ($mode == 'dawnload') {
-			if ($this->input->is_ajax_request()) {
-				$id = $this->input->post('id');
-				$this->db->select('berkas');
-				$this->db->from('template_surat');
-				$this->db->where('id',$id);
-				$template=$this->db->get();
-				foreach($template->result() as $row) {
-					$nama_file = $row->berkas;
-				}
-				$data = 'Here is some text!';
-		         $name = 'mytext.txt';
-		        force_download($name, $data);
-			}
-		}
+	}
+	public function download(){
+		$id = $this->input->post('id');
+		$this->load->helper('file'); // Load file helper
+        $file = $this->db->get_where('template_surat',['id' => $id])->row();; //Get file by id
+        $data = read_file(FCPATH . "uploads/".$patch->berkas); // Use file helper to read the file's
+        $name = $file->berkas;
+        force_download($name, $data);
 	}
 	public function get_by_id() {
 		$id = $this->input->get('id');

@@ -216,6 +216,9 @@
         $("#tgl_rabes_edit").val(data.object.tanggal);
         $("#form-edit-rapat_besar input[name='nama']").val(data.object.nama);
         datack_edit.setData(data.object.notulen);
+        $('#id_admin_edit').select2({
+          theme: 'bootstrap4'
+        });
         modal_edit.modal('show').on('shown.bs.modal', function(e) {
           $("#form-edit-rapat_besar input[name='id']").focus();
         });

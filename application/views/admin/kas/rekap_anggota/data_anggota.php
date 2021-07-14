@@ -2,7 +2,7 @@
     <thead>
         <tr>
                         <th>No</th>
-                        <th>ID admin</th>
+                        <th>Admin</th>
                         <th>Nama </th>
                         <th>Tunggakan</th>
                         <th>Total</th>
@@ -15,7 +15,7 @@
         <?php foreach($rekap_anggota->result() as $result) : ?>
         <tr>
             <td><?php echo $no++ ?></td>
-            <td><?php echo $result->id_admin ?></td>
+            <td><?php echo $result->nama_admin ?></td>
             <td><?php echo $result->nama ?></td>
             <td><?php echo $result->tunggakan ?></td>
             <td><?php echo $result->total ?></td>
@@ -99,6 +99,9 @@
         $("#form-edit-rekap_anggota input[name='tunggakan']").val(data.object.tunggakan);
         $("#form-edit-rekap_anggota input[name='total']").val(data.object.total);
         $("#form-edit-rekap_anggota input[name='status']").val(data.object.status);
+        $('#id_admin_edit').select2({
+          theme: 'bootstrap4'
+        });
         modal_edit.modal('show').on('shown.bs.modal', function(e) {
           $("#form-edit-rekap_anggota input[name='id']").focus();
         });
@@ -115,8 +118,8 @@
       data: form.serialize(),
       success: function(data){ 
         form[0].reset();
-        alert('success!');
         modal_edit.modal('hide');
+        swal("Berhasil!", "Data rekap kas anggota berhasil diedit.", "success");
         $('#rekap_anggota').DataTable().clear().destroy();
         refresh_table();
       },
@@ -128,21 +131,37 @@
     $(".hapus-data").click(function(e) {
       e.preventDefault();
       id = $(this).data('id');
-      if (confirm("Anda yakin menghapus data ini?")) {
-        $.ajax({
-          url: '<?=site_url('rekap_anggota/crud/delete')?>',
-          type: 'POST',
-          dataType: 'json',
-          data: {id: id},
-          success: function(data){ 
-          $('#rekap_anggota').DataTable().clear().destroy();
-          refresh_table();
-          },
-          error: function(response){
-          alert(response);
-          }
-        })
-      }
+      swal({
+        title: "Apa Anda Yakin?",
+        text: "Data yang terhapus,tidak dapat dikembalikan!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Batalkan!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+             url: '<?=site_url('rekap_anggota/crud/delete')?>',
+             type: 'POST',
+             dataType: 'json',
+             data: {id: id},
+             error: function() {
+                alert('Something is wrong');
+             },
+             success: function(data) {
+                  swal("Berhasil!", "Data Berhasil Dihapus.", "success");
+                  $('#siswa').DataTable().clear().destroy();
+                  refresh_table();
+             }
+          });
+        } else {
+          swal("Dibatalkan", "Data yang dipilih tidak jadi dihapus", "error");
+        }
+      });
     });
     
 </script>

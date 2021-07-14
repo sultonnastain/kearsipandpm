@@ -27,7 +27,6 @@
        contentType:false,
        cache:false,
        async:false,
-       //data: form.serialize(),
       success: function(){ 
         alert('success!');
         modal_tambah.modal('hide');
