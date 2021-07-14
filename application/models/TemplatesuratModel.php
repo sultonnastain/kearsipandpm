@@ -16,7 +16,20 @@ class TemplatesuratModel extends CI_Model {
 
 	public function delete($id)
 	{
-		return $this->db->delete($this->table, array('id' => $id));
+		$get_surat = $this->db->get_where('template_surat',['id' => $id])->row();
+        if ($get_surat){
+           if ($get_surat->berkas == NULL) {
+		      $query = $this->db->delete('template_surat',['id'=>$id]);
+			  return $query;
+		   }
+           else {
+			  $query = $this->db->delete('template_surat',['id'=>$id]);
+			  if($query){
+				$path = FCPATH . "uploads/".$get_surat->berkas;
+                unset($path);
+			}
+		  }
+        }
 	}
 	public function get_all(){
 		$this->db->select('*');

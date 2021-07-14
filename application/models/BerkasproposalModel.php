@@ -19,8 +19,9 @@ class BerkasproposalModel extends CI_Model {
 		return $this->db->delete($this->table, array('id' => $id));
 	}
 	public function get_all(){
-		$this->db->select('*');
-		$this->db->from('berkas_proposal');
+		$this->db->select('b.*,p.penomoran');
+		$this->db->from('berkas_proposal b');
+		$this->db->join('penomoran p','p.id=b.id_penomoran');
 		return $this->db->get();
 	}
 	public function get_by_id($id)

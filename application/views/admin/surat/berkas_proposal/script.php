@@ -13,6 +13,11 @@
       });
     };
     refresh_table();
+    $('#id_penomoran').select2({
+      theme: 'bootstrap4',
+      placeholder: "Pilih Id Penomoran"
+    });
+  
   
     $("#form-tambah").submit(function(e) {
       e.preventDefault();
@@ -24,8 +29,8 @@
        dataType: 'json',
        data: form.serialize(),
       success: function(){ 
-        alert('success!');
         modal_tambah.modal('hide');
+        swal("Berhasil!", "Data Berkas Proposal Berhasil Ditambahkan.", "success");
         form[0].reset();
         $('#berkas_proposal').DataTable().clear().destroy();
         refresh_table();

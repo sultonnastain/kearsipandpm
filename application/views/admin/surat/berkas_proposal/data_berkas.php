@@ -14,7 +14,7 @@
         <?php foreach($berkas_proposal->result() as $result) : ?>
         <tr>
             <td><?php echo $no++ ?></td>
-            <td><?php echo $result->id_penomoran ?></td>
+            <td><?php echo $result->penomoran ?></td>
             <td><?php echo $result->nama_kegiatan ?></td>
             <td><?php echo $result->link ?></td>
             <td><?php echo $result->tanggal_kegiatan ?></td>
@@ -86,6 +86,9 @@
         // $("#form-edit-berkas_proposal input[name='id_penomoran']").val(data.object.id_penomoran);
         //untuk dropdown di bawah
         $("#id_penomoran_edit").val(data.object.id_penomoran);
+        $('#id_penomoran_edit').select2({
+          theme: 'bootstrap4'
+        });
         $("#form-edit-berkas_proposal input[name='nama_kegiatan']").val(data.object.nama_kegiatan);
         $("#form-edit-berkas_proposal input[name='link']").val(data.object.link);
         $("#form-edit-berkas_proposal input[name='tanggal_kegiatan']").val(data.object.tanggal_kegiatan);
@@ -105,8 +108,8 @@
       data: form.serialize(),
       success: function(data){ 
         form[0].reset();
-        alert('success!');
         modal_edit.modal('hide');
+        swal("Berhasil!", "Data berkas proposal berhasil diedit.", "success");
         $('#berkas_proposal').DataTable().clear().destroy();
         refresh_table();
       },
@@ -118,21 +121,36 @@
     $(".hapus-data").click(function(e) {
       e.preventDefault();
       id = $(this).data('id');
-      if (confirm("Anda yakin menghapus data ini?")) {
-        $.ajax({
-          url: '<?=site_url('berkas_proposal/crud/delete')?>',
-          type: 'POST',
-          dataType: 'json',
-          data: {id: id},
-          success: function(data){ 
-          $('#berkas_proposal').DataTable().clear().destroy();
-          refresh_table();
-          },
-          error: function(response){
-          alert(response);
-          }
-        })
-      }
+      swal({
+        title: "Apa Anda Yakin?",
+        text: "Data yang terhapus,tidak dapat dikembalikan!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Batalkan!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+             url: '<?=site_url('berkas_proposal/crud/delete')?>',
+             type: 'POST',
+             dataType: 'json',
+             data: {id: id},
+             error: function() {
+                alert('Something is wrong');
+             },
+             success: function(data) {
+                  swal("Berhasil!", "Data Berhasil Dihapus.", "success");
+                  $('#siswa').DataTable().clear().destroy();
+                  refresh_table();
+             }
+          });
+        } else {
+          swal("Dibatalkan", "Data yang dipilih tidak jadi dihapus", "error");
+        }
+      });
     });
-    
 </script>
