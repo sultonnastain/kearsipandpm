@@ -42,6 +42,10 @@
                     <input type="text" class="form-control" autocomplete="off" name="password" placeholder="Masukkan Password">
                 </div>
                 <div class="form-group">
+                    <label for="foto">Foto</label>
+                    <input type="file" autocomplete="off"class="form-control" name="foto" placeholder="Pilih Foto" required>
+                </div>
+                <div class="form-group">
                 <label for="level">Level</label>
                 <select class="form-control select2" name="level" id="level" style="width: 100%;">
                     <option value="kabiro">Kabiro</option>

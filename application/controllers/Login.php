@@ -19,6 +19,7 @@ class Login extends CI_Controller{
                 $this->session->set_userdata('masuk',TRUE);
                 $this->session->set_userdata('level',$data['level']);
                 $this->session->set_userdata('nama',$data['nama']);
+                $this->session->set_userdata('foto',$data['foto']);
                 redirect('dashboard');
                 //  if($data['level']=='1'){ //Akses admin
                 //     // $this->session->set_userdata('akses','1');

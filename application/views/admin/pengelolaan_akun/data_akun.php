@@ -4,6 +4,7 @@
                         <th>ID</th>
                         <th>Nomor</th>
                         <th>Nama</th>
+                        <th>Foto</th>
                         <th>Username</th>
                         <th>Password</th>
                         <th>Level</th>
@@ -17,6 +18,7 @@
         <td><?php echo $result->id ?></td>
             <td><?php echo $no++ ?></td>
             <td><?php echo $result->nama ?></td>
+            <td class="text-center"><img width="90" src="<?php echo base_url()?>foto_admin/<?php echo $result->foto; ?>" /></td>
             <td><?php echo $result->username ?></td>
             <td><?php echo $result->password ?></td>
             <td><?php echo $result->level ?></td>
@@ -43,6 +45,11 @@
                 <div class="form-group">
                     <label for="nama">Nama</label>
                     <input type="text" class="form-control" autocomplete="off" name="nama" placeholder="Masukkan Nama admin">
+                </div>
+                <div class="form-group">
+                    <label for="foto">Foto</label></br>
+                    <img id="foto-admin" src="" alt="Foto Admin" width="150" height="200">
+                    <input type="file" autocomplete="off"class="form-control" name="foto" placeholder="Pilih Foto">
                 </div>
                 <div class="form-group">
                     <label for="username">Username</label>
@@ -84,6 +91,8 @@
       .done(function(data) {
         $("#form-edit-pengelolaan_akun input[name='id']").val(data.object.id);
         $("#form-edit-pengelolaan_akun input[name='nama']").val(data.object.nama);
+        var foto = data.object.foto;
+        $('#foto-admin').attr("src", `<?php echo base_url()?>foto_admin/${foto}`);
         $("#form-edit-pengelolaan_akun input[name='username']").val(data.object.username);
         $("#form-edit-pengelolaan_akun input[name='password']").val(data.object.password);
         $("#form-edit-pengelolaan_akun input[name='level']").val(data.object.level);
@@ -99,12 +108,15 @@
     $.ajax({
       url: '<?=site_url('pengelolaan_akun/crud/update')?>',
       type: 'POST',
-      dataType: 'json',
-      data: form.serialize(),
+      data:new FormData(this),
+      processData:false,
+      contentType:false,
+      cache:false,
+      async:false,
       success: function(data){ 
         form[0].reset();
-        alert('success!');
         modal_edit.modal('hide');
+        swal("Berhasil!", "Data akun berhasil diedit.", "success");
         $('#pengelolaan_akun').DataTable().clear().destroy();
         refresh_table();
       },
@@ -116,21 +128,37 @@
     $(".hapus-data").click(function(e) {
       e.preventDefault();
       id = $(this).data('id');
-      if (confirm("Anda yakin menghapus data ini?")) {
-        $.ajax({
-          url: '<?=site_url('pengelolaan_akun/crud/delete')?>',
-          type: 'POST',
-          dataType: 'json',
-          data: {id: id},
-          success: function(data){ 
-          $('#pengelolaan_akun').DataTable().clear().destroy();
-          refresh_table();
-          },
-          error: function(response){
-          alert(response);
-          }
-        })
-      }
+      swal({
+        title: "Apa Anda Yakin?",
+        text: "Data yang terhapus,tidak dapat dikembalikan!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Batalkan!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+             url: '<?=site_url('pengelolaan_akun/crud/delete')?>',
+             type: 'POST',
+             dataType: 'json',
+             data: {id: id},
+             error: function() {
+                alert('Something is wrong');
+             },
+             success: function(data) {
+                  swal("Berhasil!", "Data Berhasil Dihapus.", "success");
+                  $('#pengelolaan_akun').DataTable().clear().destroy();
+                  refresh_table();
+             }
+          });
+        } else {
+          swal("Dibatalkan", "Data yang dipilih tidak jadi dihapus", "error");
+        }
+      });
     });
     
 </script>

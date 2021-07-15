@@ -20,11 +20,14 @@
       $.ajax({
        url: '<?=site_url('pengelolaan_akun/crud/insert')?>',
        type: 'POST',
-       dataType: 'json',
-       data: form.serialize(),
+       data:new FormData(this),
+       processData:false,
+       contentType:false,
+       cache:false,
+       async:false,
       success: function(){ 
-        alert('success!');
         modal_tambah.modal('hide');
+        swal("Berhasil!", "Data Akun Baru Telah Ditambahkan.", "success");
         form[0].reset();
         $('#pengelolaan_akun').DataTable().clear().destroy();
         refresh_table();

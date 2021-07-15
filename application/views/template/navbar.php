@@ -84,7 +84,7 @@
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $this->session->userdata('level');?></span>
                     <?php echo $this->session->userdata('nama');?>
                     <img class="img-profile rounded-circle"
-                        src="<?=base_url()?>assets/img/biro.png">
+                        src="<?php echo base_url()?>foto_admin/<?php echo $this->session->userdata('foto'); ?>">
             
                 </a>
                 <!-- Dropdown - User Information -->

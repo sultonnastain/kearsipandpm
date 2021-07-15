@@ -16,7 +16,18 @@ class PengelolaanakunModel extends CI_Model {
 
 	public function delete($id)
 	{
-		return $this->db->delete($this->table, array('id' => $id));
+		$get_admin = $this->db->get_where('admin',['id' => $id])->row();
+        if ($get_admin){
+           if ($get_admin->foto == NULL) {
+		      $query = $this->db->delete('admin',['id'=>$id]);
+		   }
+           else {
+			  $query = $this->db->delete('admin',['id'=>$id]);
+			  if($query){
+				return unlink("foto_admin/".$get_admin->foto);
+			}
+		  }
+        }
 	}
 	public function get_all(){
 		$this->db->select('*');
