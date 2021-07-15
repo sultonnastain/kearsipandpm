@@ -65,7 +65,7 @@
 
             <!-- Nav Item - Alerts -->
             <li class="nav-item dropdown no-arrow mx-1">
-                <a class="nav-link dropdown-toggle" href="<?=base_url('admin/auth/login.php')?>" id="alertsDropdown" role="button"
+                <a class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
                     data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Logout

@@ -1,3 +1,8 @@
+<style>
+.btn2{
+  font-weight:900;
+}
+</style>
 <table id="konstitusi" class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -19,6 +24,7 @@
             <td><?php echo $result->berkas ?></td>
             <td><?php echo $result->tanggal ?></td>
             <td class="text-center">
+                <i class="btn btn2 btn-xs btn-primary fa fa-file-download dawnload-data" data-id="<?php echo $result->id ?>" data-placement="top" title="Dawnload"></i>
                 <i class="btn btn-xs btn-primary fa fa-edit edit-data" data-id="<?php echo $result->id ?>" data-placement="top" title="Edit"></i>
                 <i class="btn btn-xs btn-danger fas fa-trash-alt hapus-data" data-id="<?php echo $result->id ?>" data-placement="top" title="Delete"></i>
             </td>
@@ -51,12 +57,13 @@
                     <input type="text" class="form-control" autocomplete="off" name="nama_konstitusi" placeholder="Masukkan Nama Kegiatan">
                 </div>
                 <div class="form-group">
-                    <label for="berkas">Berkas Konstitusi</label>
-                    <input type="file"/>
+                    <label for="berkas">Berkas Konstitusi(Kosongkan bila file tidak diganti)</label></br>
+                    <input type="file" name="berkas"/>
+                    <p id="p_nama_berkas"></p>
                 </div>
                 <div class="form-group">
                     <label for="tanggal">Tanggal Pengesahan</label>
-                    <input type="date" class="form-control" autocomplete="off" name="tanggal placeholder="Masukkan Tanggal Kegiatan">
+                    <input type="date" class="form-control" autocomplete="off" name="tanggal" placeholder="Masukkan Tanggal Kegiatan">
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
@@ -87,8 +94,11 @@
         //untuk dropdown di bawah
         $("#id_penomoran_edit").val(data.object.id_penomoran);
         $("#form-edit-konstitusi input[name='nama_konstitusi']").val(data.object.nama_konstitusi);
-        $("#form-edit-konstitusi input[name='berkas']").val(data.object.berkas);
+        $("#p_nama_berkas").text("Berkas Terupload : "+data.object.berkas);
         $("#form-edit-konstitusi input[name='tanggal']").val(data.object.tanggal);
+        $('#id_penomoran_edit').select2({
+          theme: 'bootstrap4'
+        });
         modal_edit.modal('show').on('shown.bs.modal', function(e) {
           $("#form-edit-konstitusi input[name='id']").focus();
         });
@@ -102,11 +112,15 @@
       url: '<?=site_url('konstitusi/crud/update')?>',
       type: 'POST',
       dataType: 'json',
-      data: form.serialize(),
+      data:new FormData(this),
+      processData:false,
+      contentType:false,
+      cache:false,
+      async:false,
       success: function(data){ 
         form[0].reset();
-        alert('success!');
         modal_edit.modal('hide');
+        swal("Berhasil!", "Data rekap konstitusi berhasil diedit.", "success");
         $('#konstitusi').DataTable().clear().destroy();
         refresh_table();
       },
@@ -118,21 +132,42 @@
     $(".hapus-data").click(function(e) {
       e.preventDefault();
       id = $(this).data('id');
-      if (confirm("Anda yakin menghapus data ini?")) {
-        $.ajax({
-          url: '<?=site_url('konstitusi/crud/delete')?>',
-          type: 'POST',
-          dataType: 'json',
-          data: {id: id},
-          success: function(data){ 
-          $('#konstitusi').DataTable().clear().destroy();
-          refresh_table();
-          },
-          error: function(response){
-          alert(response);
-          }
-        })
-      }
+      swal({
+        title: "Apa Anda Yakin?",
+        text: "Data yang terhapus,tidak dapat dikembalikan!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Batalkan!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+             url: '<?=site_url('konstitusi/crud/delete')?>',
+             type: 'POST',
+             dataType: 'json',
+             data: {id: id},
+             error: function() {
+                alert('Something is wrong');
+             },
+             success: function(data) {
+                  swal("Berhasil!", "Data Berhasil Dihapus.", "success");
+                  $('#konstitusi').DataTable().clear().destroy();
+                  refresh_table();
+             }
+          });
+        } else {
+          swal("Dibatalkan", "Data yang dipilih tidak jadi dihapus", "error");
+        }
+      });
+    });
+    var base_url = "<?php echo base_url();?>";
+    $(".dawnload-data").click(function(e) {
+      id = $(this).data('id');
+      location.href = base_url+`konstitusi/download/${id}`;
     });
     
 </script>

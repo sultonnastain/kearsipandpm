@@ -16,7 +16,20 @@ class KonstitusiModel extends CI_Model {
 
 	public function delete($id)
 	{
-		return $this->db->delete($this->table, array('id' => $id));
+		$get_berkas = $this->db->get_where('konstitusi',['id' => $id])->row();
+        if ($get_berkas){
+           if ($get_berkas->berkas == NULL) {
+		      $query = $this->db->delete('konstitusi',['id'=>$id]);
+			  return $query;
+		   }
+           else {
+			  $query = $this->db->delete('konstitusi',['id'=>$id]);
+			  if($query){
+				$path = FCPATH . "uploads/".$get_berkas->berkas;
+                unset($path);
+			}
+		  }
+        }
 	}
 	public function get_all(){
 		$this->db->select('*');

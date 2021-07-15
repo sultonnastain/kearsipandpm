@@ -13,6 +13,10 @@
       });
     };
     refresh_table();
+    $('#id_penomoran').select2({
+      theme: 'bootstrap4',
+      placeholder: "Pilih Penomoran"
+    });
   
     $("#form-tambah").submit(function(e) {
       e.preventDefault();
@@ -29,7 +33,7 @@
        async:false,
     //    data: form.serialize(),
       success: function(){ 
-        alert('success!');
+        swal("Berhasil!", "Data Rekap Organisasi Berhasil Ditambahkan.", "success");
         modal_tambah.modal('hide');
         form[0].reset();
         $('#konstitusi').DataTable().clear().destroy();

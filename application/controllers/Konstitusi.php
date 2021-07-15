@@ -46,7 +46,6 @@ class Konstitusi extends CI_Controller {
 				$this->upload->initialize($config); 
 				if($this->upload->do_upload("berkas")){ 
 				$data = array(
-					'id' => $this->input->post('id'),
 					'id_penomoran' => $this->input->post('id_penomoran'),
 					'nama_konstitusi' => $this->input->post('nama_konstitusi'),
 					'berkas' => $filename,
@@ -56,24 +55,44 @@ class Konstitusi extends CI_Controller {
 				echo json_encode($result);
 			}
 		}
-		else if ($mode == 'update') {
-			if ($this->input->is_ajax_request()) {
-				$id = $this->input->post('id');
-				if (!empty($_FILES["berkas"]["name"])) {
-					$this->berkas = $this->_uploadBerkas();
-				} else {
-					$this->image = $post["old_berkas"];
-				}
-				$data = array(
-					'id' => $this->input->post('id'),
-					'id_penomoran' => $this->input->post('id_penomoran'),
-					'nama_konstitusi' => $this->input->post('nama_konstitusi'),
-					'berkas' => $filename,
-					'tanggal' => $this->input->post('tanggal')
-				);
-				$result = $this->KonstitusiModel->update($data, $id);
-				echo json_encode($result);
+	}
+	else if ($mode == 'update') {
+		if ($this->input->is_ajax_request()) {
+			$id = $this->input->post('id');
+			$data = array(
+				'id_penomoran' => $this->input->post('id_penomoran'),
+				'nama_konstitusi' => $this->input->post('nama_konstitusi'),
+				'tanggal' => $this->input->post('tanggal')
+			);
+			if (empty($_FILES['berkas']['name'])) 
+			{
 			}
+			else
+			{	
+				$patch = $this->db->get_where('konstitusi',['id' => $id])->row();
+				if($patch){
+				  $path = FCPATH . "uploads/".$patch->berkas;
+				  if(file_exists($path)){
+					unset($path);
+				  }else{
+				  }
+				}
+				$timezone = new DateTimeZone('Asia/Jakarta');
+				$date = new DateTime();
+				$date->setTimeZone($timezone);
+				$config['upload_path']          = './uploads/';
+				$config['allowed_types']        = 'pdf|doc|docx|xslsx';
+				$config['max_size']             = 100240;
+				$filename =  date("Y-m-d_His") . '-' . $_FILES['berkas']['name'];
+				$config['file_name'] =$filename;
+				$this->upload->initialize($config); 
+				if($this->upload->do_upload("berkas")){ 
+					$data['berkas'] = $filename;
+				}
+			}
+			$result = $this->KonstitusiModel->update($data, $id);
+			echo json_encode($result);
+		}
 		}
 		else if ($mode == 'delete') {
 			if ($this->input->is_ajax_request()) {
@@ -81,28 +100,19 @@ class Konstitusi extends CI_Controller {
 				$result = $this->KonstitusiModel->delete($id);
 				echo json_encode($result);
 			}
-			function _uploadBerkas()
-			{
-				$config['upload_path']         = './upload';
-				$config['allowed_types']       = 'xls|docx|pdf';
-				$config['file_name']           = $string->id;
-				$config['overwrite']           = true;
-				$config['max_size']            = 2000000;
-				
-				$this->load->library('upload' , $config);
-		
-				if ($this->upload->do_upload('berkas')) {
-					return $this->upload->data("file name");
-				}
-				return "0";
-			}
 		}
-	}
 }
 	public function get_by_id () {
 		$id = $this->input->get('id');
 		$data = $this->KonstitusiModel->get_by_id($id);
 		echo json_encode($data);
+	}
+	public function download($id){
+		$this->load->helper('file'); // Load file helper
+        $file = $this->db->get_where('konstitusi',['id' => $id])->row();; //Get file by id
+        $data = read_file(FCPATH . "uploads/".$patch->berkas); // Use file helper to read the file's
+        $name = $file->berkas;
+        force_download($name, $data);
 	}
 		
 }
