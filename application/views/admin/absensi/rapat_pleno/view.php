@@ -365,7 +365,7 @@ body[ data-editor='InlineEditor'] .collaboration-demo__row {
                 </div>
                 <div class="form-group">
                     <label for="nama">Agenda</label>
-                    <input type="text" class="form-control" autocomplete="off" name="nama" id="agenda" placeholder="Masukkan agenda rabes">
+                    <input type="text" class="form-control" autocomplete="off" name="nama" id="agenda" placeholder="Masukkan agenda pleno">
                 </div>
                 <label for="isi">Notulensi</label>
                 <div class="centered">
