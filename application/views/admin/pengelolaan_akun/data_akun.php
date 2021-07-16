@@ -60,7 +60,7 @@
                     <input type="text" class="form-control" autocomplete="off" name="password" placeholder="Masukkan Password">
                 </div>
                 <div class="form-group">
-                <select class="form-control select2" name="level" style="width: 100%;">
+                <select class="form-control select2" name="level" id="level_edit" style="width: 100%;">
                     <option value="kabiro">Kabiro</option>
                     <option value="staff">Staff</option>
                     </select>
@@ -95,7 +95,7 @@
         $('#foto-admin').attr("src", `<?php echo base_url()?>foto_admin/${foto}`);
         $("#form-edit-pengelolaan_akun input[name='username']").val(data.object.username);
         $("#form-edit-pengelolaan_akun input[name='password']").val(data.object.password);
-        $("#form-edit-pengelolaan_akun input[name='level']").val(data.object.level);
+        $("#level_edit").val(data.object.level);
         modal_edit.modal('show').on('shown.bs.modal', function(e) {
           $("#form-edit-pengelolaan_akun input[name='id']").focus();
         });
