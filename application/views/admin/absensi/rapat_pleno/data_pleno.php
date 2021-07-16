@@ -35,7 +35,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <input type="hidden" name="id"/>
+            <input type="hidden" id="hidden_id" name="id"/>
             <div class="col-lg-12">
                <div class="form-group">
                     <label for="id_admin">ID admin</label>
@@ -227,10 +227,10 @@
     //Proses Update ke Db
     document.querySelector( '#submit_edit' ).addEventListener( 'click', () => {
     const editorData = datack_edit.getData();
-    var id_admin = $("#id_admin_edit").val();
-	  var agenda = $("#agenda_edit").val();
-	  var tanggal  = $("#tgl_pleno_edit").val();
-    var id  = $("#hidden_id").val();
+    const id_admin = $("#id_admin_edit").val();
+	  const agenda = $("#agenda_edit").val();
+	  const tanggal  = $("#tgl_pleno_edit").val();
+    const id  = $("#hidden_id").val();
     $.ajax({
       url: '<?=site_url('rapat_pleno/crud/update')?>',
       type: 'POST',

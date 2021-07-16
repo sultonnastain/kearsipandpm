@@ -214,7 +214,6 @@
         $("#id_admin_edit").val(data.object.id_admin);
         $("#agenda_edit").val(data.object.nama);
         $("#tgl_rabes_edit").val(data.object.tanggal);
-        $("#form-edit-rapat_besar input[name='nama']").val(data.object.nama);
         datack_edit.setData(data.object.notulen);
         $('#id_admin_edit').select2({
           theme: 'bootstrap4'
@@ -227,14 +226,15 @@
     //Proses Update ke Db
     document.querySelector( '#submit_edit' ).addEventListener( 'click', () => {
     const editorData = datack_edit.getData();
-    var id_admin = $("#id_admin_edit").val();
-	  var agenda = $("#agenda_edit").val();
-	  var tanggal  = $("#tgl_rabes_edit").val();
-    var id  = $("#hidden_id").val();
+    let id_admin = $("#id_admin_edit").val();
+	  let agenda = $("#agenda_edit").val();
+	  let tanggal  = $("#tgl_rabes_edit").val();
+    let id  = $("#hidden_id").val();
     $.ajax({
       url: '<?=site_url('rapat_besar/crud/update')?>',
       type: 'POST',
       dataType: 'json',
+      async:false,
       data: {
        id : id,
 		   id_admin :id_admin,
