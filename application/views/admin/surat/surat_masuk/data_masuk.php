@@ -16,7 +16,7 @@
             <td><?php echo $no++ ?></td>
             <td><?php echo $result->nama_pengirim ?></td>
             <td><?php echo $result->jenis_kegiatan ?></td>
-            <td><?php echo $result->link ?></td>
+            <td><a href="/" target="_blank"><?php echo $result->link ?></a></td>
             <td><?php echo $result->tanggal ?></td>
             <td class="text-center">
                 <i class="btn btn-xs btn-primary fa fa-edit edit-data" data-id="<?php echo $result->id ?>" data-placement="top" title="Edit"></i>
